@@ -86,6 +86,39 @@ rate of human-services nonprofits per resident. Twenty-seven ZIP codes
 combine above-median poverty with below-median human-services coverage.
 [→ Service Gaps](service-gaps.qmd)
 
+## Why this exists — and what to do with it
+
+The Inland Northwest's nonprofit sector is one of the region's largest
+economic and social forces — more than 5,200 organizations, $6.5 billion in
+annual revenue, and the primary safety net for food, housing, employment, and
+youth services. Yet decisions about it — where philanthropy goes, which
+services get funded, where new organizations form — are routinely made from
+anecdote, because the underlying facts sit scattered across IRS files, Census
+tables, and federal vulnerability indices that few people have time to
+assemble. And because the region spans a state line, no single state-level
+report has ever described it whole. This site assembles that picture from
+public data, documents every method, and keeps it reproducible.
+
+**Who it's for.** Funders can see where dollars concentrate and where
+coverage gaps persist. Nonprofit boards can benchmark their reserves and
+margins against 500 regional peers. Policymakers can overlay service coverage
+with poverty and social vulnerability at the neighborhood level. Researchers
+and students can build on an open, documented pipeline.
+
+**What the data suggest doing:**
+
+1. **Fund resilience, not just programs.** One in five larger nonprofits
+   holds less than three months of operating reserves. General operating
+   support and multi-year grants matter as much as new initiatives.
+2. **Target the gap map.** Twenty-seven ZIP codes pair above-median poverty
+   with below-median human-services coverage, and Spokane County's most
+   vulnerable neighborhoods have the region's thinnest per-capita coverage —
+   addressable through siting decisions, satellite services, and capacity
+   grants. [→ Service Gaps](service-gaps.qmd)
+3. **Plan for Kootenai's growth.** The region's fastest-growing county has
+   nearly its thinnest nonprofit infrastructure per resident — a gap that
+   compounds if unaddressed.
+
 ## About this project
 
 This site analyzes the nonprofit sector across seven counties: **Spokane,
