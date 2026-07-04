@@ -1,0 +1,562 @@
+ruling_year,county,n,n_active
+1940,Kootenai County,22,12
+1940,Latah County,15,10
+1940,Lincoln County,7,3
+1940,Pend Oreille County,6,3
+1940,Spokane County,139,69
+1940,Stevens County,13,6
+1940,Whitman County,28,14
+1941,Kootenai County,6,3
+1941,Latah County,11,9
+1941,Lincoln County,4,1
+1941,Spokane County,50,30
+1941,Stevens County,7,2
+1941,Whitman County,15,5
+1942,Kootenai County,6,4
+1942,Lincoln County,1,0
+1942,Pend Oreille County,1,0
+1942,Spokane County,25,17
+1942,Stevens County,2,1
+1942,Whitman County,11,3
+1943,Kootenai County,1,1
+1943,Lincoln County,1,1
+1943,Spokane County,6,5
+1943,Stevens County,1,0
+1943,Whitman County,1,1
+1944,Kootenai County,8,4
+1944,Latah County,5,2
+1944,Lincoln County,1,1
+1944,Spokane County,14,7
+1944,Whitman County,4,0
+1945,Kootenai County,15,6
+1945,Latah County,11,8
+1945,Lincoln County,6,2
+1945,Spokane County,47,12
+1945,Stevens County,5,1
+1945,Whitman County,8,1
+1946,Kootenai County,24,12
+1946,Latah County,11,3
+1946,Lincoln County,14,0
+1946,Pend Oreille County,4,3
+1946,Spokane County,81,39
+1946,Stevens County,14,5
+1946,Whitman County,18,9
+1947,Kootenai County,3,1
+1947,Latah County,3,3
+1947,Pend Oreille County,1,1
+1947,Spokane County,12,7
+1947,Stevens County,1,1
+1947,Whitman County,7,3
+1948,Kootenai County,2,1
+1948,Lincoln County,3,2
+1948,Spokane County,9,6
+1948,Stevens County,2,1
+1948,Whitman County,1,0
+1949,Kootenai County,9,6
+1949,Latah County,3,1
+1949,Lincoln County,3,2
+1949,Spokane County,31,21
+1949,Stevens County,4,2
+1949,Whitman County,4,3
+1950,Kootenai County,6,3
+1950,Latah County,3,2
+1950,Lincoln County,1,0
+1950,Pend Oreille County,1,1
+1950,Spokane County,13,5
+1950,Whitman County,6,2
+1951,Kootenai County,4,2
+1951,Latah County,4,2
+1951,Lincoln County,4,1
+1951,Spokane County,20,9
+1951,Whitman County,6,2
+1952,Kootenai County,25,11
+1952,Latah County,4,0
+1952,Lincoln County,1,0
+1952,Spokane County,8,2
+1952,Whitman County,2,0
+1953,Kootenai County,2,0
+1953,Latah County,3,2
+1953,Spokane County,11,7
+1953,Stevens County,2,1
+1953,Whitman County,1,1
+1954,Kootenai County,1,1
+1954,Lincoln County,2,1
+1954,Spokane County,29,17
+1954,Whitman County,2,1
+1955,Kootenai County,5,4
+1955,Lincoln County,1,1
+1955,Pend Oreille County,1,0
+1955,Spokane County,11,7
+1955,Stevens County,1,0
+1955,Whitman County,3,1
+1956,Kootenai County,1,1
+1956,Lincoln County,2,1
+1956,Spokane County,13,4
+1956,Stevens County,3,1
+1956,Whitman County,1,0
+1957,Kootenai County,3,0
+1957,Latah County,4,1
+1957,Lincoln County,2,1
+1957,Pend Oreille County,1,0
+1957,Spokane County,28,9
+1957,Stevens County,1,1
+1957,Whitman County,5,2
+1958,Kootenai County,3,1
+1958,Latah County,2,1
+1958,Lincoln County,3,0
+1958,Spokane County,21,6
+1958,Stevens County,3,2
+1958,Whitman County,4,1
+1959,Kootenai County,8,3
+1959,Latah County,1,1
+1959,Spokane County,19,11
+1959,Stevens County,2,1
+1959,Whitman County,4,2
+1960,Kootenai County,5,3
+1960,Latah County,2,2
+1960,Lincoln County,2,1
+1960,Spokane County,19,6
+1960,Stevens County,2,1
+1960,Whitman County,1,0
+1961,Kootenai County,3,1
+1961,Spokane County,10,7
+1961,Whitman County,1,1
+1962,Kootenai County,5,1
+1962,Latah County,2,0
+1962,Lincoln County,1,0
+1962,Pend Oreille County,3,0
+1962,Spokane County,19,10
+1962,Stevens County,8,4
+1962,Whitman County,4,2
+1963,Kootenai County,3,2
+1963,Lincoln County,2,1
+1963,Spokane County,23,13
+1963,Stevens County,2,2
+1963,Whitman County,3,3
+1964,Kootenai County,19,14
+1964,Latah County,8,4
+1964,Lincoln County,2,2
+1964,Pend Oreille County,5,4
+1964,Spokane County,80,66
+1964,Stevens County,16,11
+1964,Whitman County,16,14
+1965,Kootenai County,16,3
+1965,Latah County,4,0
+1965,Lincoln County,6,2
+1965,Pend Oreille County,2,0
+1965,Spokane County,82,19
+1965,Stevens County,5,2
+1965,Whitman County,11,2
+1966,Kootenai County,10,5
+1966,Latah County,10,4
+1966,Lincoln County,3,1
+1966,Pend Oreille County,1,1
+1966,Spokane County,39,15
+1966,Stevens County,3,0
+1966,Whitman County,6,1
+1967,Kootenai County,9,4
+1967,Latah County,13,9
+1967,Pend Oreille County,3,3
+1967,Spokane County,25,11
+1967,Stevens County,2,1
+1967,Whitman County,2,0
+1968,Kootenai County,2,0
+1968,Latah County,4,0
+1968,Lincoln County,2,2
+1968,Pend Oreille County,1,1
+1968,Spokane County,22,6
+1968,Stevens County,2,2
+1968,Whitman County,6,0
+1969,Kootenai County,7,5
+1969,Latah County,8,2
+1969,Lincoln County,1,1
+1969,Pend Oreille County,2,1
+1969,Spokane County,36,12
+1969,Stevens County,4,1
+1969,Whitman County,4,1
+1970,Kootenai County,12,5
+1970,Latah County,3,1
+1970,Pend Oreille County,1,1
+1970,Spokane County,25,12
+1970,Stevens County,2,0
+1970,Whitman County,4,2
+1971,Kootenai County,4,1
+1971,Latah County,3,2
+1971,Lincoln County,1,0
+1971,Spokane County,34,17
+1971,Stevens County,1,0
+1971,Whitman County,4,2
+1972,Kootenai County,34,20
+1972,Latah County,27,8
+1972,Lincoln County,21,3
+1972,Pend Oreille County,14,2
+1972,Spokane County,89,29
+1972,Stevens County,29,14
+1972,Whitman County,43,9
+1973,Kootenai County,15,10
+1973,Latah County,3,1
+1973,Lincoln County,1,0
+1973,Pend Oreille County,2,0
+1973,Spokane County,35,18
+1973,Stevens County,2,1
+1973,Whitman County,4,3
+1974,Kootenai County,10,6
+1974,Latah County,5,2
+1974,Lincoln County,2,1
+1974,Spokane County,41,19
+1974,Whitman County,11,5
+1975,Kootenai County,5,2
+1975,Latah County,2,1
+1975,Lincoln County,2,2
+1975,Pend Oreille County,2,0
+1975,Spokane County,41,17
+1975,Stevens County,6,4
+1975,Whitman County,4,1
+1976,Kootenai County,9,5
+1976,Latah County,4,1
+1976,Lincoln County,2,0
+1976,Pend Oreille County,2,1
+1976,Spokane County,45,17
+1976,Stevens County,3,1
+1976,Whitman County,6,3
+1977,Kootenai County,16,12
+1977,Latah County,6,2
+1977,Lincoln County,3,0
+1977,Pend Oreille County,1,0
+1977,Spokane County,31,14
+1977,Stevens County,4,2
+1977,Whitman County,6,3
+1978,Kootenai County,11,7
+1978,Latah County,7,2
+1978,Lincoln County,3,2
+1978,Pend Oreille County,1,1
+1978,Spokane County,38,14
+1978,Stevens County,5,4
+1978,Whitman County,3,1
+1979,Kootenai County,16,4
+1979,Latah County,3,2
+1979,Lincoln County,1,1
+1979,Spokane County,30,12
+1979,Stevens County,2,1
+1979,Whitman County,7,4
+1980,Kootenai County,7,2
+1980,Latah County,8,5
+1980,Spokane County,25,16
+1980,Stevens County,4,3
+1980,Whitman County,4,2
+1981,Kootenai County,9,6
+1981,Latah County,6,1
+1981,Lincoln County,5,4
+1981,Pend Oreille County,3,1
+1981,Spokane County,53,22
+1981,Stevens County,6,4
+1981,Whitman County,7,1
+1982,Kootenai County,9,2
+1982,Latah County,9,5
+1982,Lincoln County,3,2
+1982,Pend Oreille County,2,0
+1982,Spokane County,45,18
+1982,Stevens County,1,0
+1982,Whitman County,3,2
+1983,Kootenai County,13,6
+1983,Latah County,5,2
+1983,Lincoln County,1,0
+1983,Pend Oreille County,1,1
+1983,Spokane County,52,25
+1983,Stevens County,7,2
+1983,Whitman County,1,0
+1984,Kootenai County,15,6
+1984,Latah County,3,1
+1984,Pend Oreille County,1,1
+1984,Spokane County,47,20
+1984,Stevens County,6,3
+1984,Whitman County,8,3
+1985,Kootenai County,16,6
+1985,Latah County,2,0
+1985,Lincoln County,1,1
+1985,Pend Oreille County,1,0
+1985,Spokane County,47,16
+1985,Stevens County,6,1
+1985,Whitman County,7,2
+1986,Kootenai County,11,5
+1986,Latah County,4,4
+1986,Lincoln County,2,1
+1986,Pend Oreille County,1,0
+1986,Spokane County,48,18
+1986,Stevens County,4,1
+1986,Whitman County,6,2
+1987,Kootenai County,12,3
+1987,Latah County,4,2
+1987,Lincoln County,1,0
+1987,Pend Oreille County,1,0
+1987,Spokane County,31,15
+1987,Stevens County,3,1
+1987,Whitman County,3,1
+1988,Kootenai County,4,4
+1988,Latah County,6,3
+1988,Lincoln County,2,2
+1988,Pend Oreille County,2,2
+1988,Spokane County,41,18
+1988,Stevens County,6,1
+1988,Whitman County,5,1
+1989,Kootenai County,7,2
+1989,Latah County,2,0
+1989,Lincoln County,4,2
+1989,Pend Oreille County,1,1
+1989,Spokane County,34,13
+1989,Stevens County,4,2
+1989,Whitman County,5,3
+1990,Kootenai County,8,3
+1990,Latah County,2,1
+1990,Lincoln County,2,1
+1990,Pend Oreille County,1,1
+1990,Spokane County,40,14
+1990,Stevens County,9,3
+1990,Whitman County,2,1
+1991,Kootenai County,21,12
+1991,Latah County,7,4
+1991,Lincoln County,1,0
+1991,Pend Oreille County,7,2
+1991,Spokane County,45,22
+1991,Stevens County,15,6
+1991,Whitman County,7,4
+1992,Kootenai County,9,3
+1992,Latah County,5,2
+1992,Lincoln County,5,4
+1992,Pend Oreille County,3,0
+1992,Spokane County,60,20
+1992,Stevens County,6,1
+1992,Whitman County,5,2
+1993,Kootenai County,16,8
+1993,Latah County,3,2
+1993,Lincoln County,1,0
+1993,Spokane County,53,22
+1993,Stevens County,4,1
+1993,Whitman County,5,1
+1994,Kootenai County,17,9
+1994,Latah County,9,3
+1994,Lincoln County,3,1
+1994,Pend Oreille County,4,1
+1994,Spokane County,81,31
+1994,Stevens County,9,1
+1994,Whitman County,5,2
+1995,Kootenai County,17,7
+1995,Latah County,8,4
+1995,Pend Oreille County,2,2
+1995,Spokane County,60,34
+1995,Stevens County,6,2
+1995,Whitman County,7,4
+1996,Kootenai County,23,11
+1996,Latah County,7,5
+1996,Lincoln County,7,4
+1996,Pend Oreille County,5,1
+1996,Spokane County,63,28
+1996,Stevens County,8,4
+1996,Whitman County,8,1
+1997,Kootenai County,5,2
+1997,Latah County,5,2
+1997,Lincoln County,1,1
+1997,Pend Oreille County,2,1
+1997,Spokane County,77,38
+1997,Stevens County,5,2
+1997,Whitman County,4,2
+1998,Kootenai County,26,15
+1998,Latah County,9,2
+1998,Lincoln County,1,1
+1998,Pend Oreille County,2,2
+1998,Spokane County,61,23
+1998,Stevens County,8,1
+1998,Whitman County,8,2
+1999,Kootenai County,21,11
+1999,Latah County,5,3
+1999,Lincoln County,5,2
+1999,Pend Oreille County,2,0
+1999,Spokane County,63,31
+1999,Stevens County,8,1
+1999,Whitman County,7,5
+2000,Kootenai County,20,7
+2000,Latah County,11,4
+2000,Lincoln County,1,0
+2000,Spokane County,69,26
+2000,Stevens County,9,2
+2000,Whitman County,10,6
+2001,Kootenai County,26,11
+2001,Latah County,4,1
+2001,Lincoln County,2,0
+2001,Pend Oreille County,4,1
+2001,Spokane County,58,23
+2001,Stevens County,7,3
+2001,Whitman County,7,5
+2002,Kootenai County,30,11
+2002,Latah County,11,3
+2002,Lincoln County,6,3
+2002,Pend Oreille County,3,1
+2002,Spokane County,82,35
+2002,Stevens County,12,5
+2002,Whitman County,8,8
+2003,Kootenai County,21,10
+2003,Latah County,10,4
+2003,Lincoln County,2,0
+2003,Pend Oreille County,2,1
+2003,Spokane County,80,34
+2003,Stevens County,7,3
+2003,Whitman County,4,2
+2004,Kootenai County,20,7
+2004,Latah County,12,5
+2004,Lincoln County,3,0
+2004,Pend Oreille County,2,1
+2004,Spokane County,59,28
+2004,Stevens County,10,4
+2004,Whitman County,11,5
+2005,Kootenai County,29,12
+2005,Latah County,15,9
+2005,Lincoln County,2,0
+2005,Spokane County,73,32
+2005,Stevens County,6,2
+2005,Whitman County,4,1
+2006,Kootenai County,29,18
+2006,Latah County,12,3
+2006,Lincoln County,1,1
+2006,Pend Oreille County,1,0
+2006,Spokane County,62,37
+2006,Stevens County,11,8
+2006,Whitman County,3,2
+2007,Kootenai County,10,4
+2007,Latah County,15,9
+2007,Lincoln County,2,2
+2007,Pend Oreille County,2,2
+2007,Spokane County,69,36
+2007,Stevens County,4,1
+2007,Whitman County,7,7
+2008,Kootenai County,23,14
+2008,Latah County,6,3
+2008,Lincoln County,3,3
+2008,Pend Oreille County,2,2
+2008,Spokane County,74,48
+2008,Stevens County,7,5
+2008,Whitman County,10,5
+2009,Kootenai County,30,16
+2009,Latah County,12,6
+2009,Lincoln County,1,0
+2009,Pend Oreille County,4,2
+2009,Spokane County,72,41
+2009,Stevens County,10,3
+2009,Whitman County,8,4
+2010,Kootenai County,25,15
+2010,Latah County,7,4
+2010,Lincoln County,1,0
+2010,Pend Oreille County,1,1
+2010,Spokane County,63,33
+2010,Stevens County,6,4
+2010,Whitman County,8,5
+2011,Kootenai County,20,12
+2011,Latah County,7,6
+2011,Lincoln County,2,2
+2011,Pend Oreille County,3,3
+2011,Spokane County,74,45
+2011,Stevens County,9,6
+2011,Whitman County,7,4
+2012,Kootenai County,24,8
+2012,Lincoln County,5,5
+2012,Pend Oreille County,3,3
+2012,Spokane County,66,38
+2012,Stevens County,16,13
+2012,Whitman County,4,3
+2013,Kootenai County,53,11
+2013,Latah County,14,4
+2013,Lincoln County,12,0
+2013,Pend Oreille County,3,2
+2013,Spokane County,69,41
+2013,Stevens County,10,7
+2013,Whitman County,5,4
+2014,Kootenai County,63,42
+2014,Latah County,23,14
+2014,Lincoln County,31,19
+2014,Pend Oreille County,28,11
+2014,Spokane County,236,131
+2014,Stevens County,47,23
+2014,Whitman County,44,29
+2015,Kootenai County,42,31
+2015,Latah County,13,8
+2015,Lincoln County,2,1
+2015,Pend Oreille County,4,1
+2015,Spokane County,119,72
+2015,Stevens County,17,11
+2015,Whitman County,14,11
+2016,Kootenai County,44,26
+2016,Latah County,13,9
+2016,Lincoln County,4,2
+2016,Pend Oreille County,3,3
+2016,Spokane County,108,68
+2016,Stevens County,13,10
+2016,Whitman County,9,7
+2017,Kootenai County,54,34
+2017,Latah County,12,8
+2017,Lincoln County,6,5
+2017,Pend Oreille County,3,3
+2017,Spokane County,115,65
+2017,Stevens County,11,4
+2017,Whitman County,4,2
+2018,Kootenai County,62,36
+2018,Latah County,15,10
+2018,Lincoln County,7,5
+2018,Pend Oreille County,5,5
+2018,Spokane County,114,66
+2018,Stevens County,19,14
+2018,Whitman County,7,5
+2019,Kootenai County,49,29
+2019,Latah County,14,10
+2019,Lincoln County,7,6
+2019,Pend Oreille County,5,4
+2019,Spokane County,129,97
+2019,Stevens County,9,5
+2019,Whitman County,17,14
+2020,Kootenai County,45,35
+2020,Latah County,10,8
+2020,Lincoln County,2,0
+2020,Pend Oreille County,3,3
+2020,Spokane County,97,71
+2020,Stevens County,9,8
+2020,Whitman County,15,10
+2021,Kootenai County,45,29
+2021,Latah County,12,11
+2021,Lincoln County,4,4
+2021,Pend Oreille County,4,4
+2021,Spokane County,113,80
+2021,Stevens County,11,6
+2021,Whitman County,10,7
+2022,Kootenai County,67,54
+2022,Latah County,14,8
+2022,Lincoln County,1,1
+2022,Pend Oreille County,4,3
+2022,Spokane County,134,111
+2022,Stevens County,10,8
+2022,Whitman County,11,7
+2023,Kootenai County,64,59
+2023,Latah County,20,20
+2023,Lincoln County,6,6
+2023,Pend Oreille County,6,6
+2023,Spokane County,119,118
+2023,Stevens County,14,14
+2023,Whitman County,9,8
+2024,Kootenai County,72,71
+2024,Latah County,14,13
+2024,Lincoln County,5,5
+2024,Pend Oreille County,6,5
+2024,Spokane County,175,172
+2024,Stevens County,15,15
+2024,Whitman County,24,24
+2025,Kootenai County,83,83
+2025,Latah County,30,30
+2025,Lincoln County,9,9
+2025,Pend Oreille County,6,6
+2025,Spokane County,228,228
+2025,Stevens County,28,28
+2025,Whitman County,12,12
+2026,Kootenai County,20,20
+2026,Latah County,5,5
+2026,Lincoln County,1,1
+2026,Pend Oreille County,2,2
+2026,Spokane County,77,77
+2026,Stevens County,12,12
+2026,Whitman County,6,6

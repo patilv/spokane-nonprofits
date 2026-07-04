@@ -1,0 +1,19 @@
+{
+  "n_active": 5282,
+  "n_counties": 7,
+  "total_population": 881968,
+  "total_revenue": 6541767169.0,
+  "total_assets": 26215413165.0,
+  "n_reporting_revenue": 1551,
+  "n_human_services": 771,
+  "hs_share": 0.14596743657705413,
+  "region_orgs_per_10k": 59.88879415126172,
+  "spokane_orgs": 2947,
+  "spokane_per_10k": 54.14064810783303,
+  "median_poverty_rate": 12.9,
+  "n_filers": 507,
+  "median_margin": 0.051405811666889824,
+  "median_months_reserves": 10.68455380902617,
+  "pct_negative_margin": 0.32938856015779094,
+  "pct_low_reserves": 0.1932938856015779
+}
