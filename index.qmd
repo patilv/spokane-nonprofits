@@ -6,7 +6,7 @@ toc: false
 
 ::: {.key-finding}
 <span class="kf-label">Executive summary</span>
-The seven-county Inland Northwest is home to **5,282 active nonprofits**
+The seven-county Inland Northwest is home to **5,256 active nonprofits**
 serving about 882,000 residents — roughly 60 organizations for every 10,000
 people. The sector generates **$6.5 billion in annual revenue** and holds
 **$26.2 billion in assets**, but both are concentrated in a handful of large
@@ -18,7 +18,7 @@ where measured social vulnerability is highest: Spokane County.
 
 ::: {.stat-row}
 ::: {.stat-tile}
-<span class="stat-value">5,282</span>
+<span class="stat-value">5,256</span>
 <span class="stat-label">Active nonprofits</span>
 <span class="stat-note">NCCS BMF, June 2026</span>
 :::
@@ -33,12 +33,12 @@ where measured social vulnerability is highest: Spokane County.
 <span class="stat-note">most recent IRS filings</span>
 :::
 ::: {.stat-tile .accent}
-<span class="stat-value">771</span>
+<span class="stat-value">768</span>
 <span class="stat-label">Human services organizations</span>
 <span class="stat-note">NTEE I, J, K, L, O, P</span>
 :::
 ::: {.stat-tile .accent}
-<span class="stat-value">396</span>
+<span class="stat-value">395</span>
 <span class="stat-label">New nonprofits in 2025</span>
 <span class="stat-note">strongest organic year on record</span>
 :::
@@ -47,15 +47,16 @@ where measured social vulnerability is highest: Spokane County.
 ## Key findings
 
 **1. The sector is large, and growing faster than ever.**
-New IRS tax-exempt rulings reached 311 in 2024 and 396 in 2025 — the
-strongest two-year run in the region's history apart from a one-time IRS
-administrative spike in 2014, following a brief pandemic dip. The 2020s are
+New IRS tax-exempt rulings reached 310 in 2024 and 395 in 2025 — the
+strongest two-year run in the region's history, even counting the one-time
+IRS administrative spike of 2014, following a brief pandemic dip. The 2020s are
 on pace to out-produce the 2010s, the previous record decade.
 [→ Trends](trends.qmd)
 
 **2. Composition mirrors the states; scale does not.**
-The region's category mix — human services first (23% of classified
-organizations), then education and public benefit — tracks Washington and
+The region's category mix — human services first (23% of all
+registered organizations, a third of those with a classified category), then
+education and public benefit — tracks Washington and
 Idaho statewide averages closely. What distinguishes the region is
 concentration: 73 organizations with more than $10 million in revenue,
 led by Kootenai Health, Gonzaga University, and the region's community health
@@ -65,16 +66,17 @@ systems, account for the large majority of all nonprofit dollars.
 **3. Density is highest where populations are smallest.**
 Spokane and Kootenai counties host about three-quarters of the region's
 nonprofits, but rural and college counties (Lincoln, Latah, Whitman) sustain
-far more organizations per resident. Fast-growing Kootenai County has the
-region's thinnest per-capita nonprofit infrastructure.
+far more organizations per resident. Spokane County itself has the region's
+thinnest per-capita nonprofit coverage, with fast-growing Kootenai County
+next.
 [→ Geography](geography.qmd)
 
 **4. Finances are stable but thin.**
-Among 507 larger organizations with current Form 990 filings, the median
-operating margin is +5.1% and median reserves are about 10.7 months of
+Among 502 larger organizations with current Form 990 filings, the median
+operating margin is +5.0% and median reserves are about 10.6 months of
 expenses — healthy on the surface. But **one in three ran a deficit** in the
 latest year, and **one in five holds less than three months of reserves**.
-Human services organizations are more exposed than the sector overall.
+Human services organizations hold thinner reserves than the sector overall.
 [→ Financial Health](financial-health.qmd)
 
 **5. Coverage is weakest where vulnerability is highest.**

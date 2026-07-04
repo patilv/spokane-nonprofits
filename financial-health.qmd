@@ -6,13 +6,13 @@ subtitle: "Margins, reserves, and revenue mix among the region's larger nonprofi
 ::: {.key-finding}
 <span class="kf-label">Key finding</span>
 The region's larger nonprofits are, in aggregate, modestly healthy but
-thinly buffered: among **507 organizations with current Form 990 filings**,
-the median operating margin is **+5.1%** and median reserves equal **10.7
+thinly buffered: among **502 organizations with current Form 990 filings**,
+the median operating margin is **+5.0%** and median reserves equal **10.6
 months of expenses**. Underneath those medians, **one in three ran a deficit**
 in its latest fiscal year and **one in five holds less than three months of
 operating reserves** — the level commonly considered the minimum safe cushion.
-Human services organizations are more exposed: 26% are below the three-month
-line.
+Human services organizations hold thinner reserves: 27% sit below the
+three-month line.
 :::
 
 {{< include _shared.qmd >}}
@@ -34,7 +34,7 @@ finByYear = FileAttachment("data/fin_by_year.csv").csv({typed: true})
 Financial-health analysis requires full Form 990 data, so this page covers
 active regional organizations with **at least $500,000 in revenue** (plus the
 25 largest by assets) that have a 990 or 990-EZ filing from 2021 or later —
-507 organizations. Metrics come from each organization's most recent filing.
+502 organizations. Metrics come from each organization's most recent filing.
 Definitions and caveats (including why a true "overhead ratio" cannot be
 computed from extract data) are on the [Methodology](methodology.qmd) page.
 
@@ -120,7 +120,7 @@ Plot.plot({
 
 ```{ojs}
 //| echo: false
-md`<span style="color:${GU.muted}; font-size:0.85rem;"><span style="color:${GU.red}">&#9632;</span> deficit (${fpct(d3.mean(marginData, d => d.margin < 0) * 100)} of organizations) &nbsp;&nbsp;<span style="color:${GU.s1}">&#9632;</span> surplus. Margins beyond ±60% (a handful of foundations with lumpy grant income) are excluded from the chart.</span>`
+md`<span style="color:${GU.muted}; font-size:0.85rem;"><span style="color:${GU.red}">&#9632;</span> deficit (${fpct(d3.mean(marginData, d => d.margin < 0) * 100)} of organizations) &nbsp;&nbsp;<span style="color:${GU.s1}">&#9632;</span> surplus. Organizations with margins beyond ±60% (24, mostly foundations with lumpy grant income) fall outside the displayed range.</span>`
 ```
 
 ## Operating reserves

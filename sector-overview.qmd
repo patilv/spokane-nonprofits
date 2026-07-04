@@ -5,9 +5,10 @@ subtitle: "What the Inland Northwest nonprofit sector looks like today"
 
 ::: {.key-finding}
 <span class="kf-label">Key finding</span>
-The Inland Northwest hosts **5,282 active nonprofits**, and its composition
+The Inland Northwest hosts **5,256 active nonprofits**, and its composition
 closely mirrors both states' averages — **human services is the largest
-classified category (23%)**, ahead of education and public benefit. The sector
+classified category (23% of all organizations, a third of those with a
+classified NTEE code)**, ahead of education and public benefit. The sector
 is financially bottom-heavy: most organizations report no revenue to the IRS
 at all, roughly **three in ten filers bring in under $100,000**, while just 73
 organizations exceed $10 million and account for the bulk of the region's
@@ -132,7 +133,7 @@ profile for that category. Exact values in the tooltip.
 Revenue as most recently reported to the IRS. The majority of registered
 nonprofits — small clubs, PTAs, granges, all-volunteer groups — report no
 revenue at all (they fall below filing thresholds), so the chart below covers
-the 1,551 organizations with a reported revenue figure.
+the 1,540 organizations with a reported revenue figure.
 
 ```{ojs}
 //| echo: false
@@ -230,7 +231,7 @@ nonprofit revenue in the region.
 
 ## Explore every organization
 
-Search and filter all 5,282 active nonprofits. Click column headers to sort.
+Search and filter all 5,256 active nonprofits. Click column headers to sort.
 
 ```{ojs}
 //| echo: false

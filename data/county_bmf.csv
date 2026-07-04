@@ -1,8 +1,8 @@
 county,county_state,n_orgs,total_revenue,total_assets,n_reporting,n_human_services,fips
 Kootenai County,"Kootenai County, ID",1018,1321609117.0,1728463973.0,279,153,16055
 Latah County,"Latah County, ID",357,297874256.0,1016547794.0,110,45,16057
-Lincoln County,"Lincoln County, WA",143,7938312.0,33727233.0,26,22,53043
+Lincoln County,"Lincoln County, WA",122,2775314.0,16910650.0,20,20,53043
 Pend Oreille County,"Pend Oreille County, WA",115,8562852.0,21650790.0,24,18,53051
 Spokane County,"Spokane County, WA",2947,4651992638.0,22409481600.0,935,424,53063
 Stevens County,"Stevens County, WA",342,68723812.0,83781495.0,62,51,53065
-Whitman County,"Whitman County, WA",360,185066182.0,921760280.0,115,58,53075
+Whitman County,"Whitman County, WA",355,174779672.0,916101718.0,110,57,53075

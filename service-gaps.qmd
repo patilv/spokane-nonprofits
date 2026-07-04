@@ -9,9 +9,10 @@ Nonprofit coverage and community need are **misaligned at both the county and
 neighborhood level**. Spokane County has the region's highest CDC Social
 Vulnerability Index score and 22 of its 38 high-vulnerability census tracts —
 but the region's **lowest rate of human-services nonprofits per resident**.
-At the ZIP level, **27 of 103 populated ZIP codes combine above-median
-poverty with below-median human-services coverage**, concentrated in rural
-Stevens and Lincoln counties and in suburban and valley ZIPs around Spokane.
+At the ZIP level, **27 of 100 populated ZIP codes combine above-median
+poverty with below-median human-services coverage** — nearly half in Spokane
+County, including urban-core neighborhoods, with the rest spread across rural
+Stevens, Lincoln, Kootenai, and Whitman counties.
 :::
 
 {{< include _shared.qmd >}}
@@ -290,6 +291,6 @@ Three patterns stand out for funders, policymakers, and nonprofit leaders:
    poverty ZIPs in Stevens and Lincoln counties have no registered
    human-services nonprofit at all.
 3. **Kootenai's growth gap.** The region's fastest-growing county pairs low
-   vulnerability today with the region's thinnest overall nonprofit
-   infrastructure — a capacity question as its population ages and
+   vulnerability today with the region's second-thinnest overall nonprofit
+   infrastructure (after Spokane itself) — a capacity question as its population ages and
    diversifies.

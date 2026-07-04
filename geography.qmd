@@ -9,8 +9,9 @@ The region's nonprofit infrastructure is heavily concentrated in two urban
 cores: **Spokane County and Kootenai County together host about three-quarters
 of all active nonprofits** in the seven-county region. But density tells a
 different story — the small university and rural counties (Whitman, Latah,
-Lincoln) actually have **more nonprofits per resident** than Spokane, while
-fast-growing Kootenai County has the region's thinnest per-capita coverage.
+Lincoln) actually have **more nonprofits per resident** than the urban core —
+Spokane County itself has the region's thinnest per-capita coverage, with
+fast-growing Kootenai County next.
 :::
 
 {{< include _shared.qmd >}}

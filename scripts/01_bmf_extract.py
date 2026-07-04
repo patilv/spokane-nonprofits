@@ -98,7 +98,13 @@ def main() -> None:
     )
     both["county"] = both["county"].fillna(both["org_addr_zip5"].map(zipmap))
 
-    region = both[both["county"].isin(REGION)].copy()
+    # Region membership requires the (county, state) PAIR: Idaho also has a
+    # Lincoln County, and border geocodes can land in the neighbor state's
+    # county, so a name-only match admits out-of-region organizations.
+    region_keys = {f"{name}|{st}" for name, (st, _) in REGION.items()}
+    region = both[
+        (both["county"] + "|" + both["state"]).isin(region_keys)
+    ].copy()
     region["county_state"] = region["county"] + ", " + region["county"].map(
         {k: v[0] for k, v in REGION.items()}
     )

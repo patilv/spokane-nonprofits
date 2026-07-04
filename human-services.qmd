@@ -5,13 +5,13 @@ subtitle: "The organizations that meet basic community needs — food, housing, 
 
 ::: {.key-finding}
 <span class="kf-label">Key finding</span>
-**771 active human services nonprofits** (NTEE groups I, J, K, L, O, P) serve
+**768 active human services nonprofits** (NTEE groups I, J, K, L, O, P) serve
 the region, generating about **$734 million a year** — led by Second Harvest
-Inland Northwest, Goodwill Industries, and Catholic Charities of Spokane. The
-mix skews heavily toward general human services and youth development;
-**employment services (44 orgs) and housing & shelter (75 orgs) are the
-thinnest categories** relative to need, and housing organizations are among
-the region's smallest by revenue.
+Inland Northwest, Goodwill Industries, and Spokane United Methodist Homes.
+The mix skews heavily toward general human services and youth development;
+**employment services (44 orgs) is the smallest category**, and housing &
+shelter (75 orgs) remains thin relative to the scale of housing need —
+housing organizations are among the region's smallest by revenue.
 :::
 
 {{< include _shared.qmd >}}
@@ -150,7 +150,7 @@ Plot.plot({
 ::: {.chart-note}
 Food & nutrition revenue is dominated by a single organization — Second
 Harvest Inland Northwest ($152M), one of the largest food banks in the
-Northwest. Youth development has the second-most organizations (151) but the
+Northwest. Youth development has the second-most organizations (150) but the
 least combined revenue, a sign of a category built on small, volunteer-driven
 groups.
 :::
@@ -196,8 +196,9 @@ Plot.plot({
 
 ## Formation trend: is capacity keeping up?
 
-New human-services organizations formed per year across the region (IRS
-ruling dates, all vintages including since-dissolved organizations).
+New human-services organizations formed per year across the region, among
+organizations still active today (IRS ruling dates; dissolved organizations
+are not counted, so early years understate true formation activity).
 
 ```{ojs}
 //| echo: false

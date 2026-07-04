@@ -28,6 +28,8 @@ def main() -> None:
     zcta = pd.read_csv(os.path.join(OUT, "zcta_census.csv"), dtype={"zip": str})
     zips = pd.read_csv(os.path.join(OUT, "zip_counts.csv"), dtype={"zip": str})
     filings = pd.read_csv(os.path.join(OUT, "filings.csv"), dtype={"ein": str})
+    # Keep only filings for organizations in the (state-checked) region set
+    filings = filings[filings["ein"].isin(set(orgs["ein"]))]
 
     # ---- county_summary ---------------------------------------------------
     cs = county_bmf.merge(census.drop(columns=["county"]), on="fips", how="left")

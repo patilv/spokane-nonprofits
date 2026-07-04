@@ -46,9 +46,12 @@ used the **geocoded BMF state marts** for Washington and Idaho (retrieved July
 **Active organizations** are defined as those present in the most recent BMF
 vintage (June 2026). Historical vintages — organizations that have since
 dissolved or lost their exemption — are retained for the formation-trend
-analysis. County assignment uses the NCCS geocode; the small share of
-historical records without a geocode is assigned by ZIP code using a
-majority-vote ZIP-to-county map built from the geocoded records.
+analysis. County assignment requires the NCCS-geocoded county name *and* the
+organization's state to match a study county — Idaho also has a Lincoln
+County, and border-area geocodes can otherwise leak across the state line.
+The small share of historical records without a geocode is assigned by ZIP
+code using a majority-vote ZIP-to-county map built from the geocoded
+records.
 
 ### 2. IRS Form 990 financials via ProPublica Nonprofit Explorer
 
@@ -75,7 +78,8 @@ retrieved from the U.S. Census Bureau's public data API (tables B01003, S1701,
 and B19013) — the same tables the R `tidycensus` package retrieves. County
 figures use county geographies; neighborhood-level analysis uses ZIP Code
 Tabulation Areas (ZCTAs). ZIP codes that are not ZCTAs (post-office boxes and
-single-institution codes) are excluded from per-capita calculations.
+single-institution codes) are excluded from per-capita calculations, as are
+ZCTAs with fewer than 100 residents.
 
 ### 4. CDC/ATSDR Social Vulnerability Index (need assessment)
 

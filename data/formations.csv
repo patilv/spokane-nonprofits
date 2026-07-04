@@ -30,13 +30,13 @@ ruling_year,county,n,n_active
 1944,Whitman County,4,0
 1945,Kootenai County,15,6
 1945,Latah County,11,8
-1945,Lincoln County,6,2
+1945,Lincoln County,5,2
 1945,Spokane County,47,12
 1945,Stevens County,5,1
 1945,Whitman County,8,1
 1946,Kootenai County,24,12
 1946,Latah County,11,3
-1946,Lincoln County,14,0
+1946,Lincoln County,12,0
 1946,Pend Oreille County,4,3
 1946,Spokane County,81,39
 1946,Stevens County,14,5
@@ -80,11 +80,10 @@ ruling_year,county,n,n_active
 1953,Stevens County,2,1
 1953,Whitman County,1,1
 1954,Kootenai County,1,1
-1954,Lincoln County,2,1
+1954,Lincoln County,1,0
 1954,Spokane County,29,17
 1954,Whitman County,2,1
 1955,Kootenai County,5,4
-1955,Lincoln County,1,1
 1955,Pend Oreille County,1,0
 1955,Spokane County,11,7
 1955,Stevens County,1,0
@@ -103,7 +102,7 @@ ruling_year,county,n,n_active
 1957,Whitman County,5,2
 1958,Kootenai County,3,1
 1958,Latah County,2,1
-1958,Lincoln County,3,0
+1958,Lincoln County,2,0
 1958,Spokane County,21,6
 1958,Stevens County,3,2
 1958,Whitman County,4,1
@@ -135,21 +134,21 @@ ruling_year,county,n,n_active
 1963,Whitman County,3,3
 1964,Kootenai County,19,14
 1964,Latah County,8,4
-1964,Lincoln County,2,2
+1964,Lincoln County,1,1
 1964,Pend Oreille County,5,4
 1964,Spokane County,80,66
 1964,Stevens County,16,11
 1964,Whitman County,16,14
 1965,Kootenai County,16,3
 1965,Latah County,4,0
-1965,Lincoln County,6,2
+1965,Lincoln County,3,0
 1965,Pend Oreille County,2,0
 1965,Spokane County,82,19
 1965,Stevens County,5,2
 1965,Whitman County,11,2
 1966,Kootenai County,10,5
 1966,Latah County,10,4
-1966,Lincoln County,3,1
+1966,Lincoln County,1,1
 1966,Pend Oreille County,1,1
 1966,Spokane County,39,15
 1966,Stevens County,3,0
@@ -179,7 +178,7 @@ ruling_year,county,n,n_active
 1970,Pend Oreille County,1,1
 1970,Spokane County,25,12
 1970,Stevens County,2,0
-1970,Whitman County,4,2
+1970,Whitman County,3,2
 1971,Kootenai County,4,1
 1971,Latah County,3,2
 1971,Lincoln County,1,0
@@ -188,7 +187,7 @@ ruling_year,county,n,n_active
 1971,Whitman County,4,2
 1972,Kootenai County,34,20
 1972,Latah County,27,8
-1972,Lincoln County,21,3
+1972,Lincoln County,12,3
 1972,Pend Oreille County,14,2
 1972,Spokane County,89,29
 1972,Stevens County,29,14
@@ -214,7 +213,7 @@ ruling_year,county,n,n_active
 1975,Whitman County,4,1
 1976,Kootenai County,9,5
 1976,Latah County,4,1
-1976,Lincoln County,2,0
+1976,Lincoln County,1,0
 1976,Pend Oreille County,2,1
 1976,Spokane County,45,17
 1976,Stevens County,3,1
@@ -225,17 +224,16 @@ ruling_year,county,n,n_active
 1977,Pend Oreille County,1,0
 1977,Spokane County,31,14
 1977,Stevens County,4,2
-1977,Whitman County,6,3
+1977,Whitman County,5,2
 1978,Kootenai County,11,7
 1978,Latah County,7,2
-1978,Lincoln County,3,2
+1978,Lincoln County,2,2
 1978,Pend Oreille County,1,1
 1978,Spokane County,38,14
 1978,Stevens County,5,4
 1978,Whitman County,3,1
 1979,Kootenai County,16,4
 1979,Latah County,3,2
-1979,Lincoln County,1,1
 1979,Spokane County,30,12
 1979,Stevens County,2,1
 1979,Whitman County,7,4
@@ -294,7 +292,7 @@ ruling_year,county,n,n_active
 1987,Whitman County,3,1
 1988,Kootenai County,4,4
 1988,Latah County,6,3
-1988,Lincoln County,2,2
+1988,Lincoln County,1,1
 1988,Pend Oreille County,2,2
 1988,Spokane County,41,18
 1988,Stevens County,6,1
@@ -329,7 +327,6 @@ ruling_year,county,n,n_active
 1992,Whitman County,5,2
 1993,Kootenai County,16,8
 1993,Latah County,3,2
-1993,Lincoln County,1,0
 1993,Spokane County,53,22
 1993,Stevens County,4,1
 1993,Whitman County,5,1
@@ -348,7 +345,7 @@ ruling_year,county,n,n_active
 1995,Whitman County,7,4
 1996,Kootenai County,23,11
 1996,Latah County,7,5
-1996,Lincoln County,7,4
+1996,Lincoln County,4,3
 1996,Pend Oreille County,5,1
 1996,Spokane County,63,28
 1996,Stevens County,8,4
@@ -389,7 +386,7 @@ ruling_year,county,n,n_active
 2001,Whitman County,7,5
 2002,Kootenai County,30,11
 2002,Latah County,11,3
-2002,Lincoln County,6,3
+2002,Lincoln County,5,3
 2002,Pend Oreille County,3,1
 2002,Spokane County,82,35
 2002,Stevens County,12,5
@@ -416,11 +413,10 @@ ruling_year,county,n,n_active
 2005,Whitman County,4,1
 2006,Kootenai County,29,18
 2006,Latah County,12,3
-2006,Lincoln County,1,1
 2006,Pend Oreille County,1,0
 2006,Spokane County,62,37
 2006,Stevens County,11,8
-2006,Whitman County,3,2
+2006,Whitman County,1,0
 2007,Kootenai County,10,4
 2007,Latah County,15,9
 2007,Lincoln County,2,2
@@ -444,83 +440,82 @@ ruling_year,county,n,n_active
 2009,Whitman County,8,4
 2010,Kootenai County,25,15
 2010,Latah County,7,4
-2010,Lincoln County,1,0
 2010,Pend Oreille County,1,1
 2010,Spokane County,63,33
 2010,Stevens County,6,4
 2010,Whitman County,8,5
 2011,Kootenai County,20,12
 2011,Latah County,7,6
-2011,Lincoln County,2,2
+2011,Lincoln County,1,1
 2011,Pend Oreille County,3,3
 2011,Spokane County,74,45
 2011,Stevens County,9,6
-2011,Whitman County,7,4
+2011,Whitman County,6,3
 2012,Kootenai County,24,8
-2012,Lincoln County,5,5
+2012,Lincoln County,3,3
 2012,Pend Oreille County,3,3
 2012,Spokane County,66,38
 2012,Stevens County,16,13
 2012,Whitman County,4,3
 2013,Kootenai County,53,11
 2013,Latah County,14,4
-2013,Lincoln County,12,0
+2013,Lincoln County,2,0
 2013,Pend Oreille County,3,2
 2013,Spokane County,69,41
 2013,Stevens County,10,7
 2013,Whitman County,5,4
 2014,Kootenai County,63,42
 2014,Latah County,23,14
-2014,Lincoln County,31,19
+2014,Lincoln County,26,17
 2014,Pend Oreille County,28,11
 2014,Spokane County,236,131
 2014,Stevens County,47,23
 2014,Whitman County,44,29
 2015,Kootenai County,42,31
 2015,Latah County,13,8
-2015,Lincoln County,2,1
+2015,Lincoln County,1,1
 2015,Pend Oreille County,4,1
 2015,Spokane County,119,72
 2015,Stevens County,17,11
 2015,Whitman County,14,11
 2016,Kootenai County,44,26
 2016,Latah County,13,9
-2016,Lincoln County,4,2
+2016,Lincoln County,1,1
 2016,Pend Oreille County,3,3
 2016,Spokane County,108,68
 2016,Stevens County,13,10
 2016,Whitman County,9,7
 2017,Kootenai County,54,34
 2017,Latah County,12,8
-2017,Lincoln County,6,5
+2017,Lincoln County,4,4
 2017,Pend Oreille County,3,3
 2017,Spokane County,115,65
 2017,Stevens County,11,4
 2017,Whitman County,4,2
 2018,Kootenai County,62,36
 2018,Latah County,15,10
-2018,Lincoln County,7,5
+2018,Lincoln County,6,5
 2018,Pend Oreille County,5,5
 2018,Spokane County,114,66
 2018,Stevens County,19,14
 2018,Whitman County,7,5
 2019,Kootenai County,49,29
 2019,Latah County,14,10
-2019,Lincoln County,7,6
+2019,Lincoln County,5,5
 2019,Pend Oreille County,5,4
 2019,Spokane County,129,97
 2019,Stevens County,9,5
 2019,Whitman County,17,14
 2020,Kootenai County,45,35
 2020,Latah County,10,8
-2020,Lincoln County,2,0
+2020,Lincoln County,1,0
 2020,Pend Oreille County,3,3
 2020,Spokane County,97,71
 2020,Stevens County,9,8
-2020,Whitman County,15,10
+2020,Whitman County,14,9
 2021,Kootenai County,45,29
 2021,Latah County,12,11
-2021,Lincoln County,4,4
+2021,Lincoln County,3,3
 2021,Pend Oreille County,4,4
 2021,Spokane County,113,80
 2021,Stevens County,11,6
@@ -534,21 +529,21 @@ ruling_year,county,n,n_active
 2022,Whitman County,11,7
 2023,Kootenai County,64,59
 2023,Latah County,20,20
-2023,Lincoln County,6,6
+2023,Lincoln County,5,5
 2023,Pend Oreille County,6,6
 2023,Spokane County,119,118
 2023,Stevens County,14,14
 2023,Whitman County,9,8
 2024,Kootenai County,72,71
 2024,Latah County,14,13
-2024,Lincoln County,5,5
+2024,Lincoln County,4,4
 2024,Pend Oreille County,6,5
 2024,Spokane County,175,172
 2024,Stevens County,15,15
 2024,Whitman County,24,24
 2025,Kootenai County,83,83
 2025,Latah County,30,30
-2025,Lincoln County,9,9
+2025,Lincoln County,8,8
 2025,Pend Oreille County,6,6
 2025,Spokane County,228,228
 2025,Stevens County,28,28

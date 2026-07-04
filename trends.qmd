@@ -6,11 +6,11 @@ subtitle: "How the sector has grown — and where it's headed"
 ::: {.key-finding}
 <span class="kf-label">Key finding</span>
 Nonprofit formation in the Inland Northwest is surging. After a pandemic dip
-in 2020 (181 new IRS rulings), new formations climbed to **311 in 2024 and
-396 in 2025 — the strongest two-year run on record** apart from a one-time
-administrative spike in 2014, when the IRS introduced the streamlined Form
+in 2020 (179 new IRS rulings), new formations climbed to **310 in 2024 and
+395 in 2025 — the strongest two-year run on record**, even counting the
+one-time administrative spike of 2014, when the IRS introduced the streamlined Form
 1023-EZ and processed a backlog of reinstatements. The 2010s produced more
-new nonprofits (about 2,060 IRS rulings) than any prior decade, and the 2020s
+new nonprofits (about 2,030 IRS rulings) than any prior decade, and the 2020s
 are on pace to exceed them.
 :::
 
@@ -33,7 +33,7 @@ orgs = FileAttachment("data/orgs_active.csv").csv({typed: true})
 Each point is the number of organizations receiving IRS tax-exempt rulings
 that year, across all seven counties — including organizations that have since
 dissolved. The red line is a five-year moving average. 2026 is a partial year
-and is excluded. The 2014 spike (472 rulings) is largely administrative: the
+and is excluded. The 2014 spike (467 rulings) is largely administrative: the
 IRS launched the short-form 1023-EZ application that July and worked through
 a backlog of reinstatements following the 2011–2012 automatic revocations.
 
@@ -136,13 +136,13 @@ Plot.plot({
 
 ::: {.chart-note}
 \* The 2020s bar (red) covers only 2020–2025 — six years — and has already
-reached two-thirds of the full 2010s total.
+passed three-quarters of the full 2010s total.
 :::
 
 ## Where growth is happening
 
 Spokane County still produces the most new nonprofits in absolute terms, but
-Kootenai County's share of regional formations has risen steadily with its
+Kootenai County's share of regional formations has risen with its
 population boom. The chart compares each county's formations per five-year
 period.
 
