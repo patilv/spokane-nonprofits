@@ -208,7 +208,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <div class="key-finding">
-<p><span class="kf-label">Key finding</span> Nonprofit formation in the Inland Northwest is surging. After a pandemic dip in 2020 (181 new IRS rulings), new formations climbed to <strong>311 in 2024 and 396 in 2025 — the strongest two-year run on record</strong> apart from a one-time administrative spike in 2014, when the IRS introduced the streamlined Form 1023-EZ and processed a backlog of reinstatements. The 2010s produced more new nonprofits (about 2,060 IRS rulings) than any prior decade, and the 2020s are on pace to exceed them.</p>
+<p><span class="kf-label">Key finding</span> Nonprofit formation in the Inland Northwest is surging. After a pandemic dip in 2020 (179 new IRS rulings), new formations climbed to <strong>310 in 2024 and 395 in 2025 — the strongest two-year run on record</strong>, even counting the one-time administrative spike of 2014, when the IRS introduced the streamlined Form 1023-EZ and processed a backlog of reinstatements. The 2010s produced more new nonprofits (about 2,030 IRS rulings) than any prior decade, and the 2020s are on pace to exceed them.</p>
 </div>
 <div class="cell hidden">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="21" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 20;"><span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>GU <span class="op">=</span> ({</span>
@@ -274,7 +274,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="new-nonprofit-formations-by-year" class="level2">
 <h2 class="anchored" data-anchor-id="new-nonprofit-formations-by-year">New nonprofit formations by year</h2>
-<p>Each point is the number of organizations receiving IRS tax-exempt rulings that year, across all seven counties — including organizations that have since dissolved. The red line is a five-year moving average. 2026 is a partial year and is excluded. The 2014 spike (472 rulings) is largely administrative: the IRS launched the short-form 1023-EZ application that July and worked through a backlog of reinstatements following the 2011–2012 automatic revocations.</p>
+<p>Each point is the number of organizations receiving IRS tax-exempt rulings that year, across all seven counties — including organizations that have since dissolved. The red line is a five-year moving average. 2026 is a partial year and is excluded. The 2014 spike (467 rulings) is largely administrative: the IRS launched the short-form 1023-EZ application that July and worked through a backlog of reinstatements following the 2011–2012 automatic revocations.</p>
 <div class="cell hidden">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb7" data-startfrom="106" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 105;"><span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>formByYear <span class="op">=</span> {</span>
 <span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> roll <span class="op">=</span> d3<span class="op">.</span><span class="fu">rollups</span>(</span>
@@ -384,12 +384,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="chart-note">
-<p>* The 2020s bar (red) covers only 2020–2025 — six years — and has already reached two-thirds of the full 2010s total.</p>
+<p>* The 2020s bar (red) covers only 2020–2025 — six years — and has already passed three-quarters of the full 2010s total.</p>
 </div>
 </section>
 <section id="where-growth-is-happening" class="level2">
 <h2 class="anchored" data-anchor-id="where-growth-is-happening">Where growth is happening</h2>
-<p>Spokane County still produces the most new nonprofits in absolute terms, but Kootenai County’s share of regional formations has risen steadily with its population boom. The chart compares each county’s formations per five-year period.</p>
+<p>Spokane County still produces the most new nonprofits in absolute terms, but Kootenai County’s share of regional formations has risen with its population boom. The chart compares each county’s formations per five-year period.</p>
 <div class="cell hidden">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb12" data-startfrom="236" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 235;"><span id="cb12-236"><a href="#cb12-236" aria-hidden="true" tabindex="-1"></a>countyGroups <span class="op">=</span> formations</span>
 <span id="cb12-237"><a href="#cb12-237" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">ruling_year</span> <span class="op">&gt;=</span> <span class="dv">1990</span> <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">ruling_year</span> <span class="op">&lt;=</span> <span class="dv">2024</span>)</span>

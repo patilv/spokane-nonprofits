@@ -1,7 +1,4 @@
 zip,county,n_orgs,n_human_services,total_revenue
-83324,Lincoln County,2,0,226892.0
-83349,Lincoln County,5,0,0.0
-83352,Lincoln County,14,2,4936106.0
 83537,Latah County,13,2,25890.0
 83801,Kootenai County,30,7,408508.0
 83803,Kootenai County,7,1,0.0
@@ -18,7 +15,6 @@ zip,county,n_orgs,n_human_services,total_revenue
 83835,Kootenai County,176,26,89671827.0
 83842,Kootenai County,1,0,0.0
 83843,Latah County,229,25,178018354.0
-83843,Whitman County,5,1,10286510.0
 83844,Latah County,26,1,78660167.0
 83851,Kootenai County,1,1,0.0
 83854,Kootenai County,179,30,23648238.0

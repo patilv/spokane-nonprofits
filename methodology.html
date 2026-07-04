@@ -251,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Most recent reported revenue, income, and assets from IRS filings</li>
 <li>Every BMF vintage in which the organization has appeared since 1989</li>
 </ul>
-<p><strong>Active organizations</strong> are defined as those present in the most recent BMF vintage (June 2026). Historical vintages — organizations that have since dissolved or lost their exemption — are retained for the formation-trend analysis. County assignment uses the NCCS geocode; the small share of historical records without a geocode is assigned by ZIP code using a majority-vote ZIP-to-county map built from the geocoded records.</p>
+<p><strong>Active organizations</strong> are defined as those present in the most recent BMF vintage (June 2026). Historical vintages — organizations that have since dissolved or lost their exemption — are retained for the formation-trend analysis. County assignment requires the NCCS-geocoded county name <em>and</em> the organization’s state to match a study county — Idaho also has a Lincoln County, and border-area geocodes can otherwise leak across the state line. The small share of historical records without a geocode is assigned by ZIP code using a majority-vote ZIP-to-county map built from the geocoded records.</p>
 </section>
 <section id="irs-form-990-financials-via-propublica-nonprofit-explorer" class="level3">
 <h3 class="anchored" data-anchor-id="irs-form-990-financials-via-propublica-nonprofit-explorer">2. IRS Form 990 financials via ProPublica Nonprofit Explorer</h3>
@@ -266,7 +266,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="census-american-community-survey-population-and-poverty" class="level3">
 <h3 class="anchored" data-anchor-id="census-american-community-survey-population-and-poverty">3. Census American Community Survey (population and poverty)</h3>
-<p>Population, poverty, and income figures are 2019–2023 ACS 5-year estimates retrieved from the U.S. Census Bureau’s public data API (tables B01003, S1701, and B19013) — the same tables the R <code>tidycensus</code> package retrieves. County figures use county geographies; neighborhood-level analysis uses ZIP Code Tabulation Areas (ZCTAs). ZIP codes that are not ZCTAs (post-office boxes and single-institution codes) are excluded from per-capita calculations.</p>
+<p>Population, poverty, and income figures are 2019–2023 ACS 5-year estimates retrieved from the U.S. Census Bureau’s public data API (tables B01003, S1701, and B19013) — the same tables the R <code>tidycensus</code> package retrieves. County figures use county geographies; neighborhood-level analysis uses ZIP Code Tabulation Areas (ZCTAs). ZIP codes that are not ZCTAs (post-office boxes and single-institution codes) are excluded from per-capita calculations, as are ZCTAs with fewer than 100 residents.</p>
 </section>
 <section id="cdcatsdr-social-vulnerability-index-need-assessment" class="level3">
 <h3 class="anchored" data-anchor-id="cdcatsdr-social-vulnerability-index-need-assessment">4. CDC/ATSDR Social Vulnerability Index (need assessment)</h3>
