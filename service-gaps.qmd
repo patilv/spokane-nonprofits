@@ -1,0 +1,295 @@
+---
+title: "Service Gaps"
+subtitle: "Overlaying nonprofit coverage with poverty and social vulnerability"
+---
+
+::: {.key-finding}
+<span class="kf-label">Key finding</span>
+Nonprofit coverage and community need are **misaligned at both the county and
+neighborhood level**. Spokane County has the region's highest CDC Social
+Vulnerability Index score and 22 of its 38 high-vulnerability census tracts —
+but the region's **lowest rate of human-services nonprofits per resident**.
+At the ZIP level, **27 of 103 populated ZIP codes combine above-median
+poverty with below-median human-services coverage**, concentrated in rural
+Stevens and Lincoln counties and in suburban and valley ZIPs around Spokane.
+:::
+
+{{< include _shared.qmd >}}
+
+```{ojs}
+//| echo: false
+//| output: false
+countySummary = FileAttachment("data/county_summary.csv").csv({typed: true})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+zipGapsRaw = FileAttachment("data/zip_gaps.csv").csv({typed: true})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+sviTracts = FileAttachment("data/svi_tracts.csv").csv({typed: true})
+```
+
+## How to read this page
+
+"Coverage" here means registered human-services nonprofits (NTEE I, J, K, L,
+O, P) per resident — a measure of organizational *presence*, not service
+volume or quality. "Need" is measured two ways: the share of residents below
+the federal poverty line (Census ACS 2019–2023) and the CDC/ATSDR Social
+Vulnerability Index (SVI 2022), which ranks every county and tract nationally
+from 0 (least vulnerable) to 1 (most vulnerable). Where high need meets low
+presence, residents likely travel farther, wait longer, or go without.
+
+## County level: vulnerability vs. coverage
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  height: 420,
+  width: 900,
+  marginLeft: 55,
+  marginRight: 110,
+  marginBottom: 45,
+  style: {fontSize: "13px"},
+  x: {label: "Social Vulnerability Index (national percentile)", labelAnchor: "center", domain: [0, 0.75], grid: true},
+  y: {label: "Human services orgs per 10,000 residents", domain: [0, 22], grid: true},
+  marks: [
+    Plot.dot(countySummary, {
+      x: "RPL_THEMES",
+      y: "hs_per_10k",
+      r: d => Math.sqrt(d.population) / 55,
+      fill: GU.s1,
+      fillOpacity: 0.75,
+      stroke: "#ffffff",
+      strokeWidth: 1.5,
+      tip: true,
+      title: d => `${d.county}\nSVI: ${d3.format(".2f")(d.RPL_THEMES)} (higher = more vulnerable)\n${d3.format(".1f")(d.hs_per_10k)} HS orgs per 10k\nPoverty: ${fpct(d.poverty_rate)} · Pop: ${fnum(Math.round(d.population))}`
+    }),
+    Plot.text(countySummary, {
+      x: "RPL_THEMES",
+      y: "hs_per_10k",
+      text: d => d.county.replace(" County", ""),
+      dy: -14,
+      fill: GU.ink,
+      fontSize: 12,
+      fontWeight: 600
+    })
+  ]
+})
+```
+
+::: {.chart-note}
+Bubble size = population. The lower-right corner — high vulnerability, low
+coverage — is the gap zone. Spokane County sits closest to it, with the
+region's highest SVI (0.56) and lowest human-services density (7.8 per 10k).
+Kootenai County pairs the second-lowest coverage with fast population growth.
+:::
+
+## Neighborhood level: poverty vs. coverage by ZIP
+
+Each dot is a ZIP code (bubble size = population). The dashed lines mark the
+regional medians, dividing ZIPs into four quadrants; the upper-left —
+above-median poverty, below-median coverage — is where gaps concentrate. Red
+dots are the 27 gap-quadrant ZIPs.
+
+```{ojs}
+//| echo: false
+//| output: false
+zipGaps = zipGapsRaw.filter(d => d.poverty_rate != null && d.population >= 250)
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+medPov = d3.median(zipGaps, d => d.poverty_rate)
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+medHS = d3.median(zipGaps, d => d.hs_per_1k)
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  height: 460,
+  width: 900,
+  marginLeft: 55,
+  marginBottom: 45,
+  style: {fontSize: "13px"},
+  x: {label: "Human services orgs per 1,000 residents", labelAnchor: "center", grid: true, domain: [0, 3]},
+  y: {label: "Poverty rate (%)", grid: true},
+  color: {
+    legend: true,
+    domain: ["Gap ZIP (high poverty, low coverage)", "Other ZIP"],
+    range: [GU.red, GU.s1]
+  },
+  marks: [
+    Plot.ruleY([medPov], {stroke: GU.muted, strokeDasharray: "4,4"}),
+    Plot.ruleX([medHS], {stroke: GU.muted, strokeDasharray: "4,4"}),
+    Plot.dot(zipGaps, {
+      x: d => Math.min(d.hs_per_1k, 3),
+      y: "poverty_rate",
+      r: d => Math.sqrt(d.population) / 40,
+      fill: d => (d.poverty_rate > medPov && d.hs_per_1k < medHS) ? "Gap ZIP (high poverty, low coverage)" : "Other ZIP",
+      fillOpacity: 0.6,
+      stroke: "#ffffff",
+      strokeWidth: 0.8,
+      tip: true,
+      title: d => `ZIP ${d.zip} · ${d.county}\nPoverty: ${fpct(d.poverty_rate)}\n${fnum(d.n_human_services)} HS orgs (${d3.format(".2f")(d.hs_per_1k)} per 1k)\n${fnum(d.n_orgs)} nonprofits total · ${fnum(Math.round(d.population))} residents`
+    })
+  ]
+})
+```
+
+::: {.chart-note}
+ZIPs with fewer than 250 residents excluded; coverage clipped at 3 per 1,000
+for readability. College-town ZIPs (Pullman 99163, Moscow 83843) show high
+"poverty" rates driven largely by students. Data: NCCS BMF, ACS 2019–2023
+(ZCTA), see [Methodology](methodology.qmd).
+:::
+
+## Where the most vulnerable tracts are
+
+The CDC flags 38 of the region's 214 populated census tracts in the top
+quartile of national social vulnerability (SVI ≥ 0.75) — home to about
+165,000 people, one in five regional residents. Their distribution shows the
+double geography of need: a dense cluster in urban Spokane plus scattered
+rural tracts.
+
+```{ojs}
+//| echo: false
+//| output: false
+sviByCounty = d3.rollups(
+  sviTracts,
+  v => ({
+    total: v.length,
+    high: v.filter(d => d.RPL_THEMES >= 0.75).length,
+    highPop: d3.sum(v.filter(d => d.RPL_THEMES >= 0.75), d => d.E_TOTPOP)
+  }),
+  d => d.county
+).map(([county, o]) => ({county, ...o, share: o.high / o.total * 100}))
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  marginLeft: 130,
+  marginBottom: 45,
+  height: 300,
+  width: 900,
+  style: {fontSize: "13px"},
+  x: {label: "Census tracts", labelAnchor: "center", grid: true},
+  y: {label: null},
+  color: {
+    legend: true,
+    domain: ["High vulnerability (SVI ≥ 0.75)", "Lower vulnerability"],
+    range: [GU.red, GU.seq[1]]
+  },
+  marks: [
+    Plot.barX(
+      sviByCounty.flatMap(d => [
+        {county: d.county, type: "High vulnerability (SVI ≥ 0.75)", n: d.high},
+        {county: d.county, type: "Lower vulnerability", n: d.total - d.high}
+      ]),
+      {
+        x: "n",
+        y: "county",
+        fill: "type",
+        sort: {y: "-x"},
+        rx: 2,
+        insetTop: 2,
+        insetBottom: 2,
+        tip: true,
+        title: d => `${d.county}\n${d.type}: ${fnum(d.n)} tracts`
+      }
+    ),
+    Plot.ruleX([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+sviStrip = sviTracts.filter(d => d.E_TOTPOP > 0)
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  height: 320,
+  width: 900,
+  marginLeft: 130,
+  marginBottom: 45,
+  style: {fontSize: "13px"},
+  x: {label: "Tract Social Vulnerability Index (national percentile)", labelAnchor: "center", domain: [0, 1], grid: true},
+  y: {label: null},
+  marks: [
+    Plot.ruleX([0.75], {stroke: GU.red, strokeDasharray: "4,4"}),
+    Plot.dot(sviStrip, {
+      x: "RPL_THEMES",
+      y: "county",
+      fill: d => d.RPL_THEMES >= 0.75 ? GU.red : GU.s1,
+      fillOpacity: 0.55,
+      r: 3.5,
+      tip: true,
+      title: d => `${d.LOCATION}\nSVI: ${d3.format(".2f")(d.RPL_THEMES)}\nPopulation: ${fnum(d.E_TOTPOP)}`
+    })
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+md`<span style="color:${GU.muted}; font-size:0.85rem;">Each dot is a census tract; <span style="color:${GU.red}">red</span> marks the national top quartile (≥ 0.75). Hover for tract details.</span>`
+```
+
+## The gap list: high-poverty, low-coverage ZIP codes
+
+The table lists every gap-quadrant ZIP — above-median poverty, below-median
+human-services coverage — sorted by poverty rate. Small rural ZCTAs carry
+wide ACS margins of error; treat individual rows as flags for local
+verification, not verdicts.
+
+```{ojs}
+//| echo: false
+Inputs.table(
+  zipGaps
+    .filter(d => d.poverty_rate > medPov && d.hs_per_1k < medHS)
+    .sort((a, b) => d3.descending(a.poverty_rate, b.poverty_rate))
+    .map(d => ({
+      ZIP: String(d.zip),
+      County: d.county,
+      "Poverty rate": fpct(d.poverty_rate),
+      Residents: fnum(Math.round(d.population)),
+      "HS orgs": d.n_human_services,
+      "All nonprofits": d.n_orgs,
+      "HS per 1k": d3.format(".2f")(d.hs_per_1k)
+    })),
+  {rows: 27, layout: "auto"}
+)
+```
+
+## What this suggests
+
+Three patterns stand out for funders, policymakers, and nonprofit leaders:
+
+1. **Spokane's paradox.** The county with the region's deepest institutional
+   bench has its thinnest per-capita human-services layer — its large
+   organizations serve many people, but the count of distinct service points
+   has not kept pace with concentrated urban need.
+2. **Rural coverage is nominal, not operational.** Small counties look
+   well-covered per capita, but their "human services" organizations are
+   often tiny, volunteer-run, and food-pantry-scale — while the highest
+   poverty ZIPs in Stevens and Lincoln counties have no registered
+   human-services nonprofit at all.
+3. **Kootenai's growth gap.** The region's fastest-growing county pairs low
+   vulnerability today with the region's thinnest overall nonprofit
+   infrastructure — a capacity question as its population ages and
+   diversifies.

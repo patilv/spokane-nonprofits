@@ -1,0 +1,282 @@
+---
+title: "Sector Overview"
+subtitle: "What the Inland Northwest nonprofit sector looks like today"
+---
+
+::: {.key-finding}
+<span class="kf-label">Key finding</span>
+The Inland Northwest hosts **5,282 active nonprofits**, and its composition
+closely mirrors both states' averages — **human services is the largest
+classified category (23%)**, ahead of education and public benefit. The sector
+is financially bottom-heavy: most organizations report no revenue to the IRS
+at all, roughly **three in ten filers bring in under $100,000**, while just 73
+organizations exceed $10 million and account for the bulk of the region's
+**$6.5 billion** in nonprofit revenue.
+:::
+
+{{< include _shared.qmd >}}
+
+```{ojs}
+//| echo: false
+//| output: false
+orgs = FileAttachment("data/orgs_active.csv").csv({typed: true})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+subsectors = FileAttachment("data/subsector_counts.csv").csv({typed: true})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+nteeMajor = FileAttachment("data/ntee_major.csv").csv({typed: true})
+```
+
+## Composition by category
+
+The NCCS NTEE v2 subsectors group nonprofits into broad fields of activity.
+About 30% of registered organizations — mostly small, older, or recently
+formed groups — carry no usable NTEE code and are shown as "Unclassified."
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  marginLeft: 200,
+  marginRight: 70,
+  marginBottom: 45,
+  height: 420,
+  width: 900,
+  style: {fontSize: "13px"},
+  x: {label: "Active organizations", labelAnchor: "center", grid: true, tickFormat: "~s"},
+  y: {label: null},
+  marks: [
+    Plot.barX(subsectors.filter(d => d.geo === "Inland Northwest"), {
+      x: "n",
+      y: "subsector_name",
+      sort: {y: "-x"},
+      fill: GU.s1,
+      rx: 3,
+      insetTop: 2,
+      insetBottom: 2,
+      tip: true,
+      title: d => `${d.subsector_name}\n${fnum(d.n)} organizations (${fpct(d.share * 100)} of sector)`
+    }),
+    Plot.textX(subsectors.filter(d => d.geo === "Inland Northwest"), {
+      x: "n",
+      y: "subsector_name",
+      text: d => fnum(d.n),
+      dx: 6,
+      textAnchor: "start",
+      fill: GU.ink,
+      fontSize: 12
+    }),
+    Plot.ruleX([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+::: {.chart-note}
+Source: NCCS Business Master File, June 2026 vintage, active organizations in
+the seven-county region.
+:::
+
+## How the region compares to state averages
+
+Share of each state's (or the region's) active nonprofits by category. The
+regional mix tracks the Washington and Idaho statewide profiles remarkably
+closely — the Inland Northwest is not under- or over-built in any broad
+category relative to its states. The differences that do exist are small:
+slightly more religious congregations register here, and slightly fewer arts
+organizations than Washington overall.
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  marginLeft: 200,
+  height: 460,
+  width: 900,
+  style: {fontSize: "13px"},
+  marginBottom: 45,
+  x: {label: "Share of active nonprofits (%)", labelAnchor: "center", grid: true},
+  y: {label: null, domain: subsectors.filter(d => d.geo === "Inland Northwest").sort((a, b) => b.n - a.n).map(d => d.subsector_name)},
+  color: {
+    legend: true,
+    domain: ["Inland Northwest", "Washington (statewide)", "Idaho (statewide)"],
+    range: [GU.s1, GU.s2, GU.s3]
+  },
+  marks: [
+    Plot.dot(subsectors, {
+      x: d => d.share * 100,
+      y: "subsector_name",
+      fill: "geo",
+      r: 6,
+      stroke: "#ffffff",
+      strokeWidth: 1.5,
+      tip: true,
+      title: d => `${d.geo}\n${d.subsector_name}: ${fpct(d.share * 100)} (${fnum(d.n)} orgs)`
+    }),
+    Plot.ruleX([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+::: {.chart-note}
+Dots that sit nearly on top of each other mean the region matches the state
+profile for that category. Exact values in the tooltip.
+:::
+
+## Size distribution
+
+Revenue as most recently reported to the IRS. The majority of registered
+nonprofits — small clubs, PTAs, granges, all-volunteer groups — report no
+revenue at all (they fall below filing thresholds), so the chart below covers
+the 1,551 organizations with a reported revenue figure.
+
+```{ojs}
+//| echo: false
+//| output: false
+sizeBuckets = {
+  const withRev = orgs.filter(d => d.revenue > 0);
+  const buckets = [
+    {label: "Under $100k", test: d => d.revenue < 1e5},
+    {label: "$100k–$500k", test: d => d.revenue >= 1e5 && d.revenue < 5e5},
+    {label: "$500k–$1M", test: d => d.revenue >= 5e5 && d.revenue < 1e6},
+    {label: "$1M–$10M", test: d => d.revenue >= 1e6 && d.revenue < 1e7},
+    {label: "Over $10M", test: d => d.revenue >= 1e7}
+  ];
+  return buckets.map(b => ({
+    bucket: b.label,
+    n: withRev.filter(b.test).length,
+    revenue: d3.sum(withRev.filter(b.test), d => d.revenue)
+  }));
+}
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  height: 300,
+  width: 900,
+  marginLeft: 60,
+  style: {fontSize: "13px"},
+  x: {label: null, domain: sizeBuckets.map(d => d.bucket)},
+  y: {label: "Organizations", grid: true},
+  marks: [
+    Plot.barY(sizeBuckets, {
+      x: "bucket",
+      y: "n",
+      fill: GU.s1,
+      rx: 3,
+      insetLeft: 4,
+      insetRight: 4,
+      tip: true,
+      title: d => `${d.bucket}\n${fnum(d.n)} organizations\nCombined revenue: ${fmoney(d.revenue)}`
+    }),
+    Plot.textY(sizeBuckets, {
+      x: "bucket",
+      y: "n",
+      text: d => fnum(d.n),
+      dy: -8,
+      fill: GU.ink,
+      fontSize: 12
+    }),
+    Plot.ruleY([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  height: 300,
+  width: 900,
+  marginLeft: 70,
+  style: {fontSize: "13px"},
+  x: {label: null, domain: sizeBuckets.map(d => d.bucket)},
+  y: {label: "Combined revenue ($)", grid: true, tickFormat: d => d3.format("~s")(d).replace("G", "B")},
+  marks: [
+    Plot.barY(sizeBuckets, {
+      x: "bucket",
+      y: "revenue",
+      fill: GU.s3,
+      rx: 3,
+      insetLeft: 4,
+      insetRight: 4,
+      tip: true,
+      title: d => `${d.bucket}\n${fnum(d.n)} organizations\nCombined revenue: ${fmoney(d.revenue)}`
+    }),
+    Plot.textY(sizeBuckets, {
+      x: "bucket",
+      y: "revenue",
+      text: d => fmoney(d.revenue),
+      dy: -8,
+      fill: GU.ink,
+      fontSize: 12
+    }),
+    Plot.ruleY([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+::: {.chart-note}
+The two charts share categories but tell opposite stories: organizations
+cluster at the small end, dollars at the large end. The 73 organizations over
+$10M — led by Kootenai Health, Gonzaga University, and the region's credit
+unions and community health systems — account for the large majority of all
+nonprofit revenue in the region.
+:::
+
+## Explore every organization
+
+Search and filter all 5,282 active nonprofits. Click column headers to sort.
+
+```{ojs}
+//| echo: false
+viewof tblCounty = Inputs.select(
+  ["All counties"].concat(Array.from(new Set(orgs.map(d => d.county))).sort()),
+  {label: "County"}
+)
+```
+
+```{ojs}
+//| echo: false
+viewof tblCategory = Inputs.select(
+  ["All categories"].concat(Array.from(new Set(orgs.map(d => d.subsector_name))).sort()),
+  {label: "Category"}
+)
+```
+
+```{ojs}
+//| echo: false
+viewof tblSearch = Inputs.search(
+  orgs.filter(d =>
+    (tblCounty === "All counties" || d.county === tblCounty) &&
+    (tblCategory === "All categories" || d.subsector_name === tblCategory)
+  ),
+  {placeholder: "Search names, cities…", columns: ["name", "city"]}
+)
+```
+
+```{ojs}
+//| echo: false
+Inputs.table(
+  tblSearch.map(d => ({
+    Name: d.name,
+    City: d.city,
+    County: d.county,
+    Category: d.subsector_name,
+    NTEE: d.ntee ?? "—",
+    "Reported revenue": d.revenue > 0 ? fmoney(d.revenue) : "—",
+    Since: d.ruling_year ? String(d.ruling_year) : "—"
+  })),
+  {rows: 15, layout: "auto"}
+)
+```
+
+::: {.chart-note}
+"Since" is the year the IRS granted tax-exempt status. Revenue is the most
+recent figure reported to the IRS; "—" means the organization falls below
+filing thresholds or has not filed a financial return.
+:::

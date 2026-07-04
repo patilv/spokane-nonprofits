@@ -1,0 +1,320 @@
+---
+title: "Financial Health"
+subtitle: "Margins, reserves, and revenue mix among the region's larger nonprofits"
+---
+
+::: {.key-finding}
+<span class="kf-label">Key finding</span>
+The region's larger nonprofits are, in aggregate, modestly healthy but
+thinly buffered: among **507 organizations with current Form 990 filings**,
+the median operating margin is **+5.1%** and median reserves equal **10.7
+months of expenses**. Underneath those medians, **one in three ran a deficit**
+in its latest fiscal year and **one in five holds less than three months of
+operating reserves** — the level commonly considered the minimum safe cushion.
+Human services organizations are more exposed: 26% are below the three-month
+line.
+:::
+
+{{< include _shared.qmd >}}
+
+```{ojs}
+//| echo: false
+//| output: false
+fin = FileAttachment("data/fin_metrics.csv").csv({typed: true})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+finByYear = FileAttachment("data/fin_by_year.csv").csv({typed: true})
+```
+
+## Who this page covers
+
+Financial-health analysis requires full Form 990 data, so this page covers
+active regional organizations with **at least $500,000 in revenue** (plus the
+25 largest by assets) that have a 990 or 990-EZ filing from 2021 or later —
+507 organizations. Metrics come from each organization's most recent filing.
+Definitions and caveats (including why a true "overhead ratio" cannot be
+computed from extract data) are on the [Methodology](methodology.qmd) page.
+
+## Revenue distribution
+
+Nonprofit revenue spans five orders of magnitude, so the axis is
+logarithmic. Each dot is one organization.
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  height: 340,
+  width: 900,
+  marginLeft: 200,
+  marginBottom: 45,
+  style: {fontSize: "13px"},
+  x: {type: "log", label: "Total revenue, most recent filing ($, log scale)", labelAnchor: "center", grid: true, tickFormat: d => d3.format("~s")(d).replace("G", "B")},
+  y: {label: null},
+  marks: [
+    Plot.dot(fin.filter(d => d.totrevenue > 1000), {
+      x: "totrevenue",
+      y: "subsector_name",
+      fill: GU.s1,
+      fillOpacity: 0.45,
+      r: 3.5,
+      tip: true,
+      title: d => `${d.name}\n${d.city} · FY${d.tax_prd_yr}\nRevenue: ${fmoney(d.totrevenue)}`
+    }),
+    Plot.tickX(
+      d3.rollups(fin.filter(d => d.totrevenue > 1000), v => d3.median(v, d => d.totrevenue), d => d.subsector_name)
+        .map(([subsector_name, med]) => ({subsector_name, med})),
+      {x: "med", y: "subsector_name", stroke: GU.red, strokeWidth: 3}
+    )
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+md`<span style="color:${GU.muted}; font-size:0.85rem;"><span style="color:${GU.s1}">●</span> organization &nbsp;&nbsp;<span style="color:${GU.red}">|</span> category median. Hover any dot for the organization.</span>`
+```
+
+## Operating margins
+
+Share of latest-year revenue left after expenses. Margins cluster near
+break-even by design — nonprofits price to mission, not profit — but
+persistent deficits erode reserves.
+
+```{ojs}
+//| echo: false
+//| output: false
+marginData = fin.filter(d => d.margin != null && isFinite(d.margin) && d.margin > -1 && d.margin < 1)
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  height: 320,
+  width: 900,
+  marginLeft: 55,
+  marginBottom: 45,
+  style: {fontSize: "13px"},
+  x: {label: "Operating margin (latest fiscal year)", labelAnchor: "center", tickFormat: ".0%", domain: [-0.6, 0.6]},
+  y: {label: "Organizations", grid: true},
+  marks: [
+    Plot.rectY(marginData, Plot.binX(
+      {y: "count"},
+      {
+        x: "margin",
+        interval: 0.05,
+        fill: d => d.margin < 0 ? GU.red : GU.s1,
+        insetLeft: 1,
+        insetRight: 1,
+        rx: 2,
+        tip: true
+      }
+    )),
+    Plot.ruleX([0], {stroke: GU.ink, strokeWidth: 1.5}),
+    Plot.ruleY([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+md`<span style="color:${GU.muted}; font-size:0.85rem;"><span style="color:${GU.red}">&#9632;</span> deficit (${fpct(d3.mean(marginData, d => d.margin < 0) * 100)} of organizations) &nbsp;&nbsp;<span style="color:${GU.s1}">&#9632;</span> surplus. Margins beyond ±60% (a handful of foundations with lumpy grant income) are excluded from the chart.</span>`
+```
+
+## Operating reserves
+
+Months of expenses covered by net assets — the sector's standard solvency
+gauge. Three months is the commonly cited minimum; the red band marks
+organizations below it.
+
+```{ojs}
+//| echo: false
+//| output: false
+reserveData = fin.filter(d => d.months_reserves != null && isFinite(d.months_reserves))
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+reserveBuckets = {
+  const buckets = [
+    {label: "Negative", test: d => d.months_reserves < 0, atRisk: true},
+    {label: "0–3 months", test: d => d.months_reserves >= 0 && d.months_reserves < 3, atRisk: true},
+    {label: "3–6 months", test: d => d.months_reserves >= 3 && d.months_reserves < 6, atRisk: false},
+    {label: "6–12 months", test: d => d.months_reserves >= 6 && d.months_reserves < 12, atRisk: false},
+    {label: "1–3 years", test: d => d.months_reserves >= 12 && d.months_reserves < 36, atRisk: false},
+    {label: "3+ years", test: d => d.months_reserves >= 36, atRisk: false}
+  ];
+  return buckets.map(b => ({bucket: b.label, atRisk: b.atRisk, n: reserveData.filter(b.test).length}));
+}
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  height: 300,
+  width: 900,
+  marginLeft: 55,
+  marginBottom: 45,
+  style: {fontSize: "13px"},
+  x: {label: "Net assets as months of expenses", labelAnchor: "center", domain: reserveBuckets.map(d => d.bucket)},
+  y: {label: "Organizations", grid: true},
+  marks: [
+    Plot.barY(reserveBuckets, {
+      x: "bucket",
+      y: "n",
+      fill: d => d.atRisk ? GU.red : GU.s1,
+      rx: 3,
+      insetLeft: 5,
+      insetRight: 5,
+      tip: true,
+      title: d => `${d.bucket}: ${fnum(d.n)} organizations (${fpct(d.n / reserveData.length * 100)})`
+    }),
+    Plot.textY(reserveBuckets, {
+      x: "bucket", y: "n", text: d => fnum(d.n), dy: -8, fill: GU.ink, fontSize: 12
+    }),
+    Plot.ruleY([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+md`<span style="color:${GU.muted}; font-size:0.85rem;"><span style="color:${GU.red}">&#9632;</span> below the three-month minimum cushion (${fpct(d3.mean(reserveData, d => d.months_reserves < 3) * 100)} of organizations).</span>`
+```
+
+## Size vs. cushion
+
+Do bigger organizations hold bigger buffers? Only weakly — thin reserves
+appear at every size. Deficit-running organizations (red) with low reserves
+(lower half of the chart) are the region's financially fragile institutions.
+
+```{ojs}
+//| echo: false
+//| output: false
+scatterData = fin.filter(d =>
+  d.totrevenue > 10000 && d.months_reserves != null && isFinite(d.months_reserves) &&
+  d.months_reserves > -12 && d.months_reserves < 120 && d.margin != null
+)
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  height: 420,
+  width: 900,
+  marginLeft: 55,
+  marginBottom: 45,
+  style: {fontSize: "13px"},
+  x: {type: "log", label: "Total revenue ($, log scale)", labelAnchor: "center", tickFormat: d => d3.format("~s")(d).replace("G", "B"), grid: true},
+  y: {label: "Months of reserves", grid: true},
+  color: {
+    legend: true,
+    domain: ["Surplus", "Deficit"],
+    range: [GU.s1, GU.red]
+  },
+  marks: [
+    Plot.ruleY([3], {stroke: GU.muted, strokeDasharray: "4,4"}),
+    Plot.text([{x: 15000, y: 3}], {x: "x", y: "y", text: ["3-month minimum"], dy: -8, textAnchor: "start", fill: GU.muted, fontSize: 11}),
+    Plot.dot(scatterData, {
+      x: "totrevenue",
+      y: "months_reserves",
+      fill: d => d.margin < 0 ? "Deficit" : "Surplus",
+      fillOpacity: 0.55,
+      r: 4,
+      tip: true,
+      title: d => `${d.name}\n${d.city} · ${d.subsector_name} · FY${d.tax_prd_yr}\nRevenue: ${fmoney(d.totrevenue)}\nMargin: ${fpct(d.margin * 100)}\nReserves: ${d3.format(".1f")(d.months_reserves)} months`
+    }),
+    Plot.ruleY([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+::: {.chart-note}
+Reserves above 10 years and below −1 year are clipped from the chart (mostly
+endowed foundations and a few organizations in wind-down). Hover any dot for
+the organization.
+:::
+
+## Revenue mix: earned vs. contributed
+
+Contribution reliance — the share of revenue from donations and grants —
+shapes risk. Organizations funded mostly by contributions ride donor and
+grant cycles; fee-funded organizations ride demand.
+
+```{ojs}
+//| echo: false
+//| output: false
+mixData = fin.filter(d => d.contrib_share != null && d.contrib_share >= 0 && d.contrib_share <= 1)
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  height: 300,
+  width: 900,
+  marginLeft: 55,
+  marginBottom: 45,
+  style: {fontSize: "13px"},
+  x: {label: "Contributions & grants as share of revenue", labelAnchor: "center", tickFormat: ".0%"},
+  y: {label: "Organizations", grid: true},
+  marks: [
+    Plot.rectY(mixData, Plot.binX(
+      {y: "count"},
+      {x: "contrib_share", interval: 0.1, fill: GU.s1, insetLeft: 1, insetRight: 1, rx: 2, tip: true}
+    )),
+    Plot.ruleY([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+::: {.chart-note}
+The distribution is U-shaped: the region's nonprofits are mostly either
+donation-funded charities (right) or fee/program-funded operations such as
+health systems, housing, and credit-counseling services (left), with fewer
+blended models between.
+:::
+
+## Financial detail: every covered organization
+
+```{ojs}
+//| echo: false
+viewof finCounty = Inputs.select(
+  ["All counties"].concat(Array.from(new Set(fin.map(d => d.county))).sort()),
+  {label: "County"}
+)
+```
+
+```{ojs}
+//| echo: false
+viewof finSearch = Inputs.search(
+  fin.filter(d => finCounty === "All counties" || d.county === finCounty),
+  {placeholder: "Search names…", columns: ["name", "city"]}
+)
+```
+
+```{ojs}
+//| echo: false
+Inputs.table(
+  finSearch
+    .sort((a, b) => d3.descending(a.totrevenue, b.totrevenue))
+    .map(d => ({
+      Name: d.name,
+      County: d.county,
+      FY: String(d.tax_prd_yr),
+      Revenue: fmoney(d.totrevenue),
+      Expenses: fmoney(d.totfuncexpns),
+      "Margin": d.margin != null ? fpct(d.margin * 100) : "—",
+      "Months reserves": d.months_reserves != null && isFinite(d.months_reserves) ? d3.format(".1f")(d.months_reserves) : "—",
+      "Contrib. share": d.contrib_share != null ? fpct(Math.min(Math.max(d.contrib_share, 0), 1) * 100) : "—"
+    })),
+  {rows: 15, layout: "auto"}
+)
+```
+
+::: {.chart-note}
+Source: IRS Form 990/990-EZ extracts via ProPublica Nonprofit Explorer API,
+latest filing per organization (2021 or later).
+:::

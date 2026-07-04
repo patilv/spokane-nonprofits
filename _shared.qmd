@@ -1,0 +1,37 @@
+```{ojs}
+//| echo: false
+//| output: false
+GU = ({
+  navy: "#002967",
+  red: "#c8102e",
+  s1: "#1c5cab",
+  s2: "#1baf7a",
+  s3: "#c8102e",
+  s4: "#eda100",
+  ink: "#1a1a1a",
+  muted: "#898781",
+  grid: "#e1e0d9",
+  seq: ["#cde2fb", "#9ec5f4", "#6da7ec", "#3987e5", "#256abf", "#184f95", "#0d366b"]
+})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+fnum = d3.format(",")
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+fmoney = (x) => x == null || isNaN(x) ? "—"
+  : Math.abs(x) >= 1e9 ? "$" + d3.format(".2f")(x / 1e9) + "B"
+  : Math.abs(x) >= 1e6 ? "$" + d3.format(".1f")(x / 1e6) + "M"
+  : "$" + d3.format(",.0f")(x)
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+fpct = (x) => x == null || isNaN(x) ? "—" : d3.format(".1f")(x) + "%"
+```

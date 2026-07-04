@@ -1,0 +1,294 @@
+---
+title: "Human Services Focus"
+subtitle: "The organizations that meet basic community needs — food, housing, employment, youth, safety"
+---
+
+::: {.key-finding}
+<span class="kf-label">Key finding</span>
+**771 active human services nonprofits** (NTEE groups I, J, K, L, O, P) serve
+the region, generating about **$734 million a year** — led by Second Harvest
+Inland Northwest, Goodwill Industries, and Catholic Charities of Spokane. The
+mix skews heavily toward general human services and youth development;
+**employment services (44 orgs) and housing & shelter (75 orgs) are the
+thinnest categories** relative to need, and housing organizations are among
+the region's smallest by revenue.
+:::
+
+{{< include _shared.qmd >}}
+
+```{ojs}
+//| echo: false
+//| output: false
+orgs = FileAttachment("data/orgs_active.csv").csv({typed: true})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+formations = FileAttachment("data/formations.csv").csv({typed: true})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+countySummary = FileAttachment("data/county_summary.csv").csv({typed: true})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+hsLetters = new Map([
+  ["I", "Crime & Legal-Related"],
+  ["J", "Employment"],
+  ["K", "Food, Agriculture & Nutrition"],
+  ["L", "Housing & Shelter"],
+  ["O", "Youth Development"],
+  ["P", "Human Services (multipurpose)"]
+])
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+hsOrgs = orgs.filter(d => hsLetters.has(d.ntee_major))
+```
+
+## What counts as "human services" here
+
+This page drills into six NTEE major groups that correspond most directly to
+basic community needs:
+
+| NTEE | Category | Examples in the region |
+|---|---|---|
+| I | Crime & Legal-Related | legal aid, victim services, offender reentry |
+| J | Employment | job training, vocational rehabilitation |
+| K | Food, Agriculture & Nutrition | food banks, meal programs |
+| L | Housing & Shelter | shelters, affordable-housing developers |
+| O | Youth Development | mentoring, scouting, youth programs |
+| P | Human Services | multipurpose agencies, family services, seniors |
+
+## Organizations and dollars by category
+
+```{ojs}
+//| echo: false
+//| output: false
+hsByLetter = Array.from(hsLetters, ([letter, label]) => {
+  const rows = hsOrgs.filter(d => d.ntee_major === letter);
+  return {
+    letter,
+    label: `${label} (${letter})`,
+    n: rows.length,
+    revenue: d3.sum(rows, d => d.revenue > 0 ? d.revenue : 0)
+  };
+})
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  marginLeft: 240,
+  marginRight: 70,
+  marginBottom: 45,
+  height: 280,
+  width: 900,
+  style: {fontSize: "13px"},
+  x: {label: "Active organizations", labelAnchor: "center", grid: true},
+  y: {label: null},
+  marks: [
+    Plot.barX(hsByLetter, {
+      x: "n",
+      y: "label",
+      sort: {y: "-x"},
+      fill: GU.s1,
+      rx: 3,
+      insetTop: 2,
+      insetBottom: 2,
+      tip: true,
+      title: d => `${d.label}\n${fnum(d.n)} organizations\nCombined revenue: ${fmoney(d.revenue)}`
+    }),
+    Plot.textX(hsByLetter, {
+      x: "n", y: "label", text: d => fnum(d.n),
+      dx: 6, textAnchor: "start", fill: GU.ink, fontSize: 12
+    }),
+    Plot.ruleX([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  marginLeft: 240,
+  marginRight: 80,
+  marginBottom: 45,
+  height: 280,
+  width: 900,
+  style: {fontSize: "13px"},
+  x: {label: "Combined reported revenue ($)", labelAnchor: "center", grid: true, tickFormat: d => d3.format("~s")(d).replace("G", "B")},
+  y: {label: null},
+  marks: [
+    Plot.barX(hsByLetter, {
+      x: "revenue",
+      y: "label",
+      sort: {y: "-x"},
+      fill: GU.s3,
+      rx: 3,
+      insetTop: 2,
+      insetBottom: 2,
+      tip: true,
+      title: d => `${d.label}\n${fnum(d.n)} organizations\nCombined revenue: ${fmoney(d.revenue)}`
+    }),
+    Plot.textX(hsByLetter, {
+      x: "revenue", y: "label", text: d => fmoney(d.revenue),
+      dx: 6, textAnchor: "start", fill: GU.ink, fontSize: 12
+    }),
+    Plot.ruleX([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+::: {.chart-note}
+Food & nutrition revenue is dominated by a single organization — Second
+Harvest Inland Northwest ($152M), one of the largest food banks in the
+Northwest. Youth development has the second-most organizations (151) but the
+least combined revenue, a sign of a category built on small, volunteer-driven
+groups.
+:::
+
+## Human services coverage by county
+
+Organizations per 10,000 residents. Spokane County — the region's population
+and need center — has the *lowest* per-capita human services coverage in the
+region, a pattern examined in depth on the [Service Gaps](service-gaps.qmd)
+page.
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  marginLeft: 130,
+  marginRight: 70,
+  marginBottom: 45,
+  height: 300,
+  width: 900,
+  style: {fontSize: "13px"},
+  x: {label: "Human services orgs per 10,000 residents", labelAnchor: "center", grid: true},
+  y: {label: null},
+  marks: [
+    Plot.barX(countySummary, {
+      x: "hs_per_10k",
+      y: "county",
+      sort: {y: "-x"},
+      fill: GU.s1,
+      rx: 3,
+      insetTop: 2,
+      insetBottom: 2,
+      tip: true,
+      title: d => `${d.county}\n${fnum(d.n_human_services)} HS orgs / ${fnum(Math.round(d.population))} residents\n${d3.format(".1f")(d.hs_per_10k)} per 10k`
+    }),
+    Plot.textX(countySummary, {
+      x: "hs_per_10k", y: "county", text: d => d3.format(".1f")(d.hs_per_10k),
+      dx: 6, textAnchor: "start", fill: GU.ink, fontSize: 12
+    }),
+    Plot.ruleX([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+## Formation trend: is capacity keeping up?
+
+New human-services organizations formed per year across the region (IRS
+ruling dates, all vintages including since-dissolved organizations).
+
+```{ojs}
+//| echo: false
+//| output: false
+hsHist = {
+  // formations.csv is aggregated across all categories, so recompute from the
+  // active-org file for the human services subset (active orgs only).
+  const rows = orgs.filter(d => hsLetters.has(d.ntee_major) && d.ruling_year >= 1970 && d.ruling_year <= 2025);
+  const roll = d3.rollups(rows, v => v.length, d => d.ruling_year)
+    .map(([year, n]) => ({year, n}))
+    .sort((a, b) => a.year - b.year);
+  for (let i = 0; i < roll.length; i++) {
+    const w = roll.slice(Math.max(0, i - 4), i + 1);
+    roll[i].ma5 = d3.mean(w, d => d.n);
+  }
+  return roll;
+}
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  height: 340,
+  width: 900,
+  marginLeft: 45,
+  marginBottom: 45,
+  style: {fontSize: "13px"},
+  x: {label: "Year of IRS ruling", labelAnchor: "center", tickFormat: "d"},
+  y: {label: "New HS organizations (still active)", grid: true},
+  marks: [
+    Plot.lineY(hsHist, {x: "year", y: "n", stroke: GU.s1, strokeWidth: 1.5, curve: "monotone-x"}),
+    Plot.lineY(hsHist, {x: "year", y: "ma5", stroke: GU.red, strokeWidth: 2.5, curve: "monotone-x"}),
+    Plot.ruleY([0], {stroke: "#c3c2b7"}),
+    Plot.tip(hsHist, Plot.pointerX({
+      x: "year", y: "n",
+      title: d => `${d.year}\n${fnum(d.n)} new HS orgs\n5-yr average: ${d3.format(".1f")(d.ma5)}`
+    }))
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+md`<span style="color:${GU.muted}; font-size:0.85rem;"><span style="color:${GU.s1}">━</span> annual &nbsp;&nbsp;<span style="color:${GU.red}">━</span> 5-year moving average. Counts only organizations still active in 2026, so early years understate true formation activity.</span>`
+```
+
+## Directory: every human services organization
+
+```{ojs}
+//| echo: false
+viewof hsCat = Inputs.select(
+  ["All six categories"].concat(Array.from(hsLetters.values())),
+  {label: "Category"}
+)
+```
+
+```{ojs}
+//| echo: false
+viewof hsCounty = Inputs.select(
+  ["All counties"].concat(Array.from(new Set(hsOrgs.map(d => d.county))).sort()),
+  {label: "County"}
+)
+```
+
+```{ojs}
+//| echo: false
+viewof hsSearch = Inputs.search(
+  hsOrgs.filter(d =>
+    (hsCat === "All six categories" || hsLetters.get(d.ntee_major) === hsCat) &&
+    (hsCounty === "All counties" || d.county === hsCounty)
+  ),
+  {placeholder: "Search names, cities…", columns: ["name", "city"]}
+)
+```
+
+```{ojs}
+//| echo: false
+Inputs.table(
+  hsSearch.map(d => ({
+    Name: d.name,
+    City: d.city,
+    County: d.county,
+    Category: hsLetters.get(d.ntee_major),
+    NTEE: d.ntee ?? "—",
+    "Reported revenue": d.revenue > 0 ? fmoney(d.revenue) : "—"
+  })),
+  {rows: 15, layout: "auto"}
+)
+```
+
+::: {.chart-note}
+Source: NCCS Business Master File, June 2026 vintage. Revenue is the most
+recent figure reported to the IRS.
+:::

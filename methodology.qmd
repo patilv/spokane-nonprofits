@@ -1,0 +1,149 @@
+---
+title: "Methodology"
+subtitle: "Data sources, definitions, processing steps, and limitations"
+---
+
+::: {.key-finding}
+<span class="kf-label">What this page covers</span>
+Every number on this site is derived from four public data sources — the NCCS
+Business Master File, IRS Form 990 extracts via ProPublica's Nonprofit Explorer
+API, the U.S. Census Bureau's American Community Survey, and the CDC/ATSDR
+Social Vulnerability Index. This page documents exactly how each was collected,
+joined, and summarized, and what the numbers can and cannot say.
+:::
+
+## Study region
+
+The analysis covers seven counties that make up the greater Inland Northwest
+around Spokane:
+
+| County | State | FIPS | Anchor communities |
+|---|---|---|---|
+| Spokane County | WA | 53063 | Spokane, Spokane Valley, Cheney |
+| Kootenai County | ID | 16055 | Coeur d'Alene, Post Falls, Hayden |
+| Whitman County | WA | 53075 | Pullman, Colfax |
+| Latah County | ID | 16057 | Moscow |
+| Stevens County | WA | 53065 | Colville, Chewelah |
+| Pend Oreille County | WA | 53051 | Newport |
+| Lincoln County | WA | 53043 | Davenport |
+
+## Data sources
+
+### 1. NCCS Business Master File (nonprofit universe)
+
+The [Urban Institute's National Center for Charitable Statistics
+(NCCS)](https://urbaninstitute.github.io/nccs/datasets/bmf/) harmonizes the IRS
+Exempt Organizations Business Master File into a research-ready dataset. We
+used the **geocoded BMF state marts** for Washington and Idaho (retrieved July
+2026; files last updated July 2, 2026), which include:
+
+- EIN, organization name, address, and geocoded latitude/longitude
+- IRS ruling date (the date tax-exempt status was granted)
+- NTEE activity codes (both original letter codes and NCCS's NTEE v2 subsectors)
+- Most recent reported revenue, income, and assets from IRS filings
+- Every BMF vintage in which the organization has appeared since 1989
+
+**Active organizations** are defined as those present in the most recent BMF
+vintage (June 2026). Historical vintages — organizations that have since
+dissolved or lost their exemption — are retained for the formation-trend
+analysis. County assignment uses the NCCS geocode; the small share of
+historical records without a geocode is assigned by ZIP code using a
+majority-vote ZIP-to-county map built from the geocoded records.
+
+### 2. IRS Form 990 financials via ProPublica Nonprofit Explorer
+
+Detailed financial history comes from the [ProPublica Nonprofit Explorer
+API](https://projects.propublica.org/nonprofits/api/) (v2), which republishes
+the IRS annual extracts of Form 990 and 990-EZ filings. We retrieved the full
+filing history for every active regional organization with BMF revenue of at
+least $500,000, plus the 25 largest organizations by assets — the set of
+organizations required to file the full Form 990 and where financial-health
+analysis is most meaningful.
+
+Metrics computed from the latest filing (2021 or later) of each organization:
+
+- **Operating margin** = (total revenue − total functional expenses) / total revenue
+- **Months of reserves** = net assets at end of year ÷ (total functional expenses / 12)
+- **Contribution reliance** = contributions and grants ÷ total revenue
+- **Personnel cost share** = (officer compensation + other salaries and wages +
+  payroll taxes) ÷ total functional expenses
+
+### 3. Census American Community Survey (population and poverty)
+
+Population, poverty, and income figures are 2019–2023 ACS 5-year estimates
+retrieved from the U.S. Census Bureau's public data API (tables B01003, S1701,
+and B19013) — the same tables the R `tidycensus` package retrieves. County
+figures use county geographies; neighborhood-level analysis uses ZIP Code
+Tabulation Areas (ZCTAs). ZIP codes that are not ZCTAs (post-office boxes and
+single-institution codes) are excluded from per-capita calculations.
+
+### 4. CDC/ATSDR Social Vulnerability Index (need assessment)
+
+The [CDC/ATSDR SVI 2022](https://www.atsdr.cdc.gov/placeandhealth/svi/) ranks
+every U.S. county and census tract on 16 social factors grouped into four
+themes: socioeconomic status, household characteristics, racial and ethnic
+minority status, and housing type/transportation. We use the national
+percentile rankings (`RPL_THEMES`, 0 = least vulnerable, 1 = most vulnerable)
+at both county and tract level. Tracts flagged by CDC as having insufficient
+data are excluded.
+
+## Definitions
+
+**Human services nonprofits** are defined throughout the site as organizations
+with NTEE major group letters I (crime and legal-related), J (employment), K
+(food, agriculture and nutrition), L (housing and shelter), O (youth
+development), or P (human services) — the direct-service categories most
+relevant to community needs.
+
+**Nonprofit density** is expressed as active organizations per 10,000
+residents (county level) or per 1,000 residents (ZIP level).
+
+## Processing pipeline
+
+All processing is scripted in Python (pandas) and versioned alongside this
+site in the `scripts/` directory:
+
+1. `01_bmf_extract.py` — downloads and filters the NCCS BMF state marts,
+   produces the regional organization file, formation counts, and
+   subsector/county aggregates.
+2. `02_census_svi.py` — retrieves ACS tables for the seven counties and all
+   regional ZCTAs, and SVI 2022 county and tract files.
+3. `03_propublica.py` — retrieves Form 990 filing histories from the
+   ProPublica API.
+4. `04_process.py` — joins the sources into the analysis datasets rendered on
+   these pages.
+
+The site itself is built with [Quarto](https://quarto.org); charts and maps
+are rendered client-side with [Observable Plot](https://observablehq.com/plot/)
+and [Leaflet](https://leafletjs.com/).
+
+## Limitations
+
+- **The BMF undercounts the true sector.** Religious congregations are not
+  required to register, and organizations with under $5,000 in revenue need not
+  file. Small all-volunteer groups are underrepresented.
+- **BMF financials are point-in-time.** Revenue and asset figures reflect the
+  most recent filing the IRS has processed, which can lag one to two years.
+- **Formation trends reflect IRS ruling dates**, not founding dates, and the
+  historical file only includes organizations that appeared in a BMF vintage
+  since 1989; dissolution dates are approximated by an organization's last
+  vintage.
+- **Form 990 extracts do not separate management-and-general expense** from
+  program expense, so a true "overhead ratio" cannot be computed from the
+  extract data. Personnel cost share and contribution reliance are the closest
+  well-defined proxies and are labeled as such.
+- **Geocoding places an organization's mailing address**, which for some
+  organizations (particularly rural ones using PO boxes in town centers) may
+  differ from where services are delivered.
+- **ZCTA-level ACS estimates carry wide margins of error** in
+  lightly-populated areas; ZIP-level findings should be read as indicative
+  rather than precise.
+
+## Reproducibility and attribution
+
+All data are public and all code is available in the repository that builds
+this site. Analyses were run in July 2026.
+
+Created by **Vivek H. Patil, Ph.D.**, Professor of Marketing and Director of
+Graduate Business Programs, Gonzaga University School of Business
+Administration.

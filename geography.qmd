@@ -1,0 +1,312 @@
+---
+title: "Geography"
+subtitle: "Where the region's nonprofits are — and where they aren't"
+---
+
+::: {.key-finding}
+<span class="kf-label">Key finding</span>
+The region's nonprofit infrastructure is heavily concentrated in two urban
+cores: **Spokane County and Kootenai County together host about three-quarters
+of all active nonprofits** in the seven-county region. But density tells a
+different story — the small university and rural counties (Whitman, Latah,
+Lincoln) actually have **more nonprofits per resident** than Spokane, while
+fast-growing Kootenai County has the region's thinnest per-capita coverage.
+:::
+
+{{< include _shared.qmd >}}
+
+```{ojs}
+//| echo: false
+//| output: false
+orgs = FileAttachment("data/orgs_active.csv").csv({typed: true})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+countySummary = FileAttachment("data/county_summary.csv").csv({typed: true})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+zipGaps = FileAttachment("data/zip_gaps.csv").csv({typed: true})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+L = require("leaflet@1.9.4")
+```
+
+## Interactive map of nonprofit locations
+
+Every dot is an active nonprofit at its registered (geocoded) address. Filter
+by category or county, and click any dot for details. Human services
+organizations (NTEE groups I, J, K, L, O, P) can be highlighted in red.
+
+```{ojs}
+//| echo: false
+viewof mapCategory = Inputs.select(
+  ["All categories"].concat(Array.from(new Set(orgs.map(d => d.subsector_name))).sort()),
+  {label: "Category"}
+)
+```
+
+```{ojs}
+//| echo: false
+viewof mapCounty = Inputs.select(
+  ["All counties"].concat(Array.from(new Set(orgs.map(d => d.county))).sort()),
+  {label: "County"}
+)
+```
+
+```{ojs}
+//| echo: false
+viewof highlightHS = Inputs.toggle({label: "Highlight human services", value: true})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+mappable = orgs.filter(d => d.lat != null && d.lon != null && !isNaN(d.lat))
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+mapFiltered = mappable.filter(d =>
+  (mapCategory === "All categories" || d.subsector_name === mapCategory) &&
+  (mapCounty === "All counties" || d.county === mapCounty)
+)
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+dotMap = {
+  const div = document.createElement("div");
+  div.className = "map-frame";
+  div.style.height = "540px";
+  const map = L.map(div, {scrollWheelZoom: false});
+  map.setView([47.55, -117.1], 7);
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    maxZoom: 18
+  }).addTo(map);
+  const layer = L.layerGroup().addTo(map);
+  const renderer = L.canvas({padding: 0.3});
+  return {div, map, layer, renderer};
+}
+```
+
+```{ojs}
+//| echo: false
+dotMap.div
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+mapUpdate = {
+  const {map, layer, renderer, div} = dotMap;
+  layer.clearLayers();
+  // Leaflet needs the container to have been laid out before sizing correctly
+  setTimeout(() => map.invalidateSize(), 60);
+  const hsSet = new Set(["I", "J", "K", "L", "O", "P"]);
+  for (const d of mapFiltered) {
+    const isHS = highlightHS && hsSet.has(d.ntee_major);
+    const m = L.circleMarker([d.lat, d.lon], {
+      renderer,
+      radius: isHS ? 4.5 : 3.5,
+      color: "#ffffff",
+      weight: 0.8,
+      fillColor: isHS ? GU.red : GU.s1,
+      fillOpacity: 0.75
+    });
+    m.bindPopup(
+      `<strong>${d.name}</strong><br>` +
+      `${d.city ?? ""}, ${d.state} ${d.zip}<br>` +
+      `${d.subsector_name}${d.ntee ? " · NTEE " + d.ntee : ""}<br>` +
+      (d.revenue > 0 ? `Most recent revenue: ${fmoney(d.revenue)}` : "No revenue reported")
+    );
+    layer.addLayer(m);
+  }
+  return mapFiltered.length;
+}
+```
+
+```{ojs}
+//| echo: false
+md`<span style="color:${GU.muted}; font-size:0.85rem;">Showing **${fnum(mapUpdate)}** organizations${highlightHS ? html` — <span style="color:${GU.red}">&#9679;</span> human services, <span style="color:${GU.s1}">&#9679;</span> all other` : ""}. Dots mark registered mailing addresses.</span>`
+```
+
+## Nonprofit density by ZIP code
+
+Circle size shows the number of active nonprofits in each ZIP; color shows
+nonprofits per 1,000 residents (darker = denser). Downtown ZIPs act as the
+sector's "headquarters districts" — nonprofit addresses cluster where offices,
+mail service, and visibility are, not necessarily where clients live.
+
+```{ojs}
+//| echo: false
+//| output: false
+zipMappable = zipGaps.filter(d => d.lat != null && !isNaN(d.lat) && d.population > 0)
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+zipColor = {
+  const vals = zipMappable.map(d => d.orgs_per_1k).sort(d3.ascending);
+  const scale = d3.scaleQuantile().domain(vals).range([GU.seq[0], GU.seq[2], GU.seq[4], GU.seq[5], GU.seq[6]]);
+  return scale;
+}
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+zipMap = {
+  const div = document.createElement("div");
+  div.className = "map-frame";
+  div.style.height = "480px";
+  const map = L.map(div, {scrollWheelZoom: false});
+  map.setView([47.55, -117.1], 7);
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    maxZoom: 18
+  }).addTo(map);
+  const rScale = d3.scaleSqrt().domain([1, d3.max(zipMappable, d => d.n_orgs)]).range([4, 26]);
+  for (const d of zipMappable) {
+    L.circleMarker([d.lat, d.lon], {
+      radius: rScale(d.n_orgs),
+      color: "#ffffff",
+      weight: 1,
+      fillColor: zipColor(d.orgs_per_1k),
+      fillOpacity: 0.8
+    }).bindPopup(
+      `<strong>ZIP ${d.zip}</strong> · ${d.county}<br>` +
+      `${fnum(d.n_orgs)} nonprofits · ${fnum(Math.round(d.population))} residents<br>` +
+      `${d3.format(".1f")(d.orgs_per_1k)} per 1,000 residents<br>` +
+      `${fnum(d.n_human_services)} human services orgs`
+    ).addTo(map);
+  }
+  setTimeout(() => map.invalidateSize(), 60);
+  return {div, map};
+}
+```
+
+```{ojs}
+//| echo: false
+zipMap.div
+```
+
+```{ojs}
+//| echo: false
+md`<span style="color:${GU.muted}; font-size:0.85rem;">Circle size = number of nonprofits; color = nonprofits per 1,000 residents (${html`<span style="color:${GU.seq[0]}">&#9632;</span>`} lowest quintile → ${html`<span style="color:${GU.seq[6]}">&#9632;</span>`} highest). ZIPs with under 100 residents excluded.</span>`
+```
+
+## County comparison: totals vs. density
+
+Raw counts put Spokane far ahead; per-capita density flips the ranking. High
+per-resident counts in Whitman, Latah, and Lincoln counties reflect how many
+civic institutions — granges, booster clubs, fraternal groups, college-town
+organizations — small communities sustain relative to their size.
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  marginLeft: 130,
+  marginRight: 70,
+  marginBottom: 45,
+  height: 300,
+  width: 900,
+  style: {fontSize: "13px"},
+  x: {label: "Active nonprofits", labelAnchor: "center", grid: true, tickFormat: "~s"},
+  y: {label: null},
+  marks: [
+    Plot.barX(countySummary, {
+      x: "n_orgs",
+      y: "county",
+      sort: {y: "-x"},
+      fill: GU.s1,
+      rx: 3,
+      insetTop: 2,
+      insetBottom: 2,
+      tip: true,
+      title: d => `${d.county}\n${fnum(d.n_orgs)} nonprofits\n${fnum(Math.round(d.population))} residents`
+    }),
+    Plot.textX(countySummary, {
+      x: "n_orgs",
+      y: "county",
+      text: d => fnum(d.n_orgs),
+      dx: 6,
+      textAnchor: "start",
+      fill: GU.ink,
+      fontSize: 12
+    }),
+    Plot.ruleX([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  marginLeft: 130,
+  marginRight: 70,
+  marginBottom: 45,
+  height: 300,
+  width: 900,
+  style: {fontSize: "13px"},
+  x: {label: "Active nonprofits per 10,000 residents", labelAnchor: "center", grid: true},
+  y: {label: null},
+  marks: [
+    Plot.barX(countySummary, {
+      x: "orgs_per_10k",
+      y: "county",
+      sort: {y: "-x"},
+      fill: GU.s1,
+      rx: 3,
+      insetTop: 2,
+      insetBottom: 2,
+      tip: true,
+      title: d => `${d.county}\n${d3.format(".1f")(d.orgs_per_10k)} per 10k residents\n${fnum(d.n_orgs)} orgs / ${fnum(Math.round(d.population))} residents`
+    }),
+    Plot.textX(countySummary, {
+      x: "orgs_per_10k",
+      y: "county",
+      text: d => d3.format(".1f")(d.orgs_per_10k),
+      dx: 6,
+      textAnchor: "start",
+      fill: GU.ink,
+      fontSize: 12
+    }),
+    Plot.ruleX([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+::: {.chart-note}
+Source: NCCS Business Master File (June 2026 vintage), geocoded state marts;
+population from ACS 2019–2023 5-year estimates. See [Methodology](methodology.qmd).
+:::
+
+## County detail
+
+```{ojs}
+//| echo: false
+Inputs.table(
+  countySummary.map(d => ({
+    County: d.county_state,
+    "Nonprofits": d.n_orgs,
+    "Per 10k residents": +d3.format(".1f")(d.orgs_per_10k),
+    "Human services orgs": d.n_human_services,
+    "Population": Math.round(d.population),
+    "Total reported revenue": fmoney(d.total_revenue),
+    "Median HH income": fmoney(d.median_hh_income)
+  })),
+  {sort: "Nonprofits", reverse: true, layout: "auto"}
+)
+```

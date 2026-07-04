@@ -1,0 +1,104 @@
+---
+title: "Inland Northwest Nonprofit Sector Intelligence"
+subtitle: "A public-data portrait of the nonprofit sector in Spokane County and the surrounding Inland Northwest"
+toc: false
+---
+
+::: {.key-finding}
+<span class="kf-label">Executive summary</span>
+The seven-county Inland Northwest is home to **5,282 active nonprofits**
+serving about 882,000 residents — roughly 60 organizations for every 10,000
+people. The sector generates **$6.5 billion in annual revenue** and holds
+**$26.2 billion in assets**, but both are concentrated in a handful of large
+institutions. Formation activity is surging, finances are broadly
+stable but thin — a third of larger organizations ran a deficit in their most
+recent filing — and per-capita human-services coverage is weakest exactly
+where measured social vulnerability is highest: Spokane County.
+:::
+
+::: {.stat-row}
+::: {.stat-tile}
+<span class="stat-value">5,282</span>
+<span class="stat-label">Active nonprofits</span>
+<span class="stat-note">NCCS BMF, June 2026</span>
+:::
+::: {.stat-tile}
+<span class="stat-value">$6.5B</span>
+<span class="stat-label">Annual revenue</span>
+<span class="stat-note">most recent IRS filings</span>
+:::
+::: {.stat-tile}
+<span class="stat-value">$26.2B</span>
+<span class="stat-label">Total assets</span>
+<span class="stat-note">most recent IRS filings</span>
+:::
+::: {.stat-tile .accent}
+<span class="stat-value">771</span>
+<span class="stat-label">Human services organizations</span>
+<span class="stat-note">NTEE I, J, K, L, O, P</span>
+:::
+::: {.stat-tile .accent}
+<span class="stat-value">396</span>
+<span class="stat-label">New nonprofits in 2025</span>
+<span class="stat-note">strongest organic year on record</span>
+:::
+:::
+
+## Key findings
+
+**1. The sector is large, and growing faster than ever.**
+New IRS tax-exempt rulings reached 311 in 2024 and 396 in 2025 — the
+strongest two-year run in the region's history apart from a one-time IRS
+administrative spike in 2014, following a brief pandemic dip. The 2020s are
+on pace to out-produce the 2010s, the previous record decade.
+[→ Trends](trends.qmd)
+
+**2. Composition mirrors the states; scale does not.**
+The region's category mix — human services first (23% of classified
+organizations), then education and public benefit — tracks Washington and
+Idaho statewide averages closely. What distinguishes the region is
+concentration: 73 organizations with more than $10 million in revenue,
+led by Kootenai Health, Gonzaga University, and the region's community health
+systems, account for the large majority of all nonprofit dollars.
+[→ Sector Overview](sector-overview.qmd)
+
+**3. Density is highest where populations are smallest.**
+Spokane and Kootenai counties host about three-quarters of the region's
+nonprofits, but rural and college counties (Lincoln, Latah, Whitman) sustain
+far more organizations per resident. Fast-growing Kootenai County has the
+region's thinnest per-capita nonprofit infrastructure.
+[→ Geography](geography.qmd)
+
+**4. Finances are stable but thin.**
+Among 507 larger organizations with current Form 990 filings, the median
+operating margin is +5.1% and median reserves are about 10.7 months of
+expenses — healthy on the surface. But **one in three ran a deficit** in the
+latest year, and **one in five holds less than three months of reserves**.
+Human services organizations are more exposed than the sector overall.
+[→ Financial Health](financial-health.qmd)
+
+**5. Coverage is weakest where vulnerability is highest.**
+Spokane County has the region's highest CDC Social Vulnerability Index score
+and 22 of its 38 high-vulnerability census tracts — yet the region's *lowest*
+rate of human-services nonprofits per resident. Twenty-seven ZIP codes
+combine above-median poverty with below-median human-services coverage.
+[→ Service Gaps](service-gaps.qmd)
+
+## About this project
+
+This site analyzes the nonprofit sector across seven counties: **Spokane,
+Whitman, Stevens, Pend Oreille, and Lincoln** in Washington, and **Kootenai
+and Latah** in Idaho — the greater Inland Northwest centered on Spokane and
+Coeur d'Alene.
+
+All data are public: the Urban Institute's [NCCS Business Master
+File](https://urbaninstitute.github.io/nccs/datasets/bmf/), IRS Form 990
+extracts via the [ProPublica Nonprofit Explorer
+API](https://projects.propublica.org/nonprofits/api/), U.S. Census Bureau
+American Community Survey estimates, and the [CDC/ATSDR Social Vulnerability
+Index](https://www.atsdr.cdc.gov/placeandhealth/svi/). Methods, definitions,
+and limitations are documented on the [Methodology](methodology.qmd) page.
+
+*Created by Vivek H. Patil, Ph.D., Professor of Marketing and Director of
+Graduate Business Programs, Gonzaga University School of Business
+Administration. Analyses run July 2026.*

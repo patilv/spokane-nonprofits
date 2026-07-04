@@ -1,0 +1,57 @@
+project:
+  type: website
+  output-dir: docs
+  resources:
+    - data/
+
+website:
+  title: "Inland Northwest Nonprofit Sector Intelligence"
+  description: "A public-data analysis of the nonprofit sector in Spokane County and the surrounding Inland Northwest region."
+  site-url: https://patilv.com/spokane-nonprofits/
+  repo-url: https://github.com/patilv/spokane-nonprofits
+  navbar:
+    background: "#002967"
+    foreground: "#ffffff"
+    left:
+      - href: index.qmd
+        text: Home
+      - href: sector-overview.qmd
+        text: Sector Overview
+      - href: trends.qmd
+        text: Trends
+      - href: geography.qmd
+        text: Geography
+      - href: human-services.qmd
+        text: Human Services
+      - href: financial-health.qmd
+        text: Financial Health
+      - href: service-gaps.qmd
+        text: Service Gaps
+      - href: methodology.qmd
+        text: Methodology
+  page-footer:
+    background: "#002967"
+    foreground: "#ffffff"
+    left: |
+      Created by [Vivek H. Patil, Ph.D.](https://www.gonzaga.edu/school-of-business-administration), Professor of Marketing and Director of Graduate Business Programs, Gonzaga University School of Business Administration.
+    right: |
+      Public data: NCCS · IRS 990 / ProPublica · Census ACS · CDC SVI
+
+format:
+  html:
+    theme:
+      - cosmo
+      - styles/custom.scss
+    toc: true
+    toc-depth: 3
+    page-layout: article
+    grid:
+      body-width: 950px
+    link-external-newwindow: true
+    include-in-header:
+      text: |
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+              integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
+execute:
+  freeze: false

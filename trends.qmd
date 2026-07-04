@@ -1,0 +1,269 @@
+---
+title: "Trends"
+subtitle: "How the sector has grown — and where it's headed"
+---
+
+::: {.key-finding}
+<span class="kf-label">Key finding</span>
+Nonprofit formation in the Inland Northwest is surging. After a pandemic dip
+in 2020 (181 new IRS rulings), new formations climbed to **311 in 2024 and
+396 in 2025 — the strongest two-year run on record** apart from a one-time
+administrative spike in 2014, when the IRS introduced the streamlined Form
+1023-EZ and processed a backlog of reinstatements. The 2010s produced more
+new nonprofits (about 2,060 IRS rulings) than any prior decade, and the 2020s
+are on pace to exceed them.
+:::
+
+{{< include _shared.qmd >}}
+
+```{ojs}
+//| echo: false
+//| output: false
+formations = FileAttachment("data/formations.csv").csv({typed: true})
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+orgs = FileAttachment("data/orgs_active.csv").csv({typed: true})
+```
+
+## New nonprofit formations by year
+
+Each point is the number of organizations receiving IRS tax-exempt rulings
+that year, across all seven counties — including organizations that have since
+dissolved. The red line is a five-year moving average. 2026 is a partial year
+and is excluded. The 2014 spike (472 rulings) is largely administrative: the
+IRS launched the short-form 1023-EZ application that July and worked through
+a backlog of reinstatements following the 2011–2012 automatic revocations.
+
+```{ojs}
+//| echo: false
+//| output: false
+formByYear = {
+  const roll = d3.rollups(
+    formations.filter(d => d.ruling_year >= 1960 && d.ruling_year <= 2025),
+    v => d3.sum(v, d => d.n),
+    d => d.ruling_year
+  ).map(([year, n]) => ({year, n})).sort((a, b) => a.year - b.year);
+  for (let i = 0; i < roll.length; i++) {
+    const w = roll.slice(Math.max(0, i - 4), i + 1);
+    roll[i].ma5 = d3.mean(w, d => d.n);
+  }
+  return roll;
+}
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  height: 380,
+  width: 900,
+  marginLeft: 50,
+  marginBottom: 45,
+  style: {fontSize: "13px"},
+  x: {label: "Year of IRS ruling", labelAnchor: "center", tickFormat: "d"},
+  y: {label: "New organizations", grid: true},
+  marks: [
+    Plot.lineY(formByYear, {x: "year", y: "n", stroke: GU.s1, strokeWidth: 1.5, curve: "monotone-x"}),
+    Plot.dot(formByYear, {x: "year", y: "n", fill: GU.s1, r: 2}),
+    Plot.lineY(formByYear, {x: "year", y: "ma5", stroke: GU.red, strokeWidth: 2.5, curve: "monotone-x"}),
+    Plot.ruleY([0], {stroke: "#c3c2b7"}),
+    Plot.tip(formByYear, Plot.pointerX({
+      x: "year",
+      y: "n",
+      title: d => `${d.year}\n${fnum(d.n)} new rulings\n5-yr average: ${d3.format(".0f")(d.ma5)}`
+    }))
+  ]
+})
+```
+
+```{ojs}
+//| echo: false
+md`<span style="color:${GU.muted}; font-size:0.85rem;"><span style="color:${GU.s1}">━</span> annual rulings &nbsp;&nbsp;<span style="color:${GU.red}">━</span> 5-year moving average. Hover for values.</span>`
+```
+
+::: {.chart-note}
+Source: NCCS Business Master File, all vintages 1989–2026. Rulings before
+~1989 appear only if the organization survived into the BMF era, so early
+decades are undercounted; the recent surge is not an artifact of this.
+:::
+
+## Formations by decade
+
+```{ojs}
+//| echo: false
+//| output: false
+byDecade = d3.rollups(
+  formations.filter(d => d.ruling_year >= 1960 && d.ruling_year <= 2025),
+  v => d3.sum(v, d => d.n),
+  d => Math.floor(d.ruling_year / 10) * 10
+).map(([decade, n]) => ({decade: `${decade}s`, n, partial: decade === 2020})).sort((a, b) => d3.ascending(a.decade, b.decade))
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  height: 300,
+  width: 900,
+  marginLeft: 60,
+  style: {fontSize: "13px"},
+  x: {label: null},
+  y: {label: "New organizations", grid: true},
+  marks: [
+    Plot.barY(byDecade, {
+      x: "decade",
+      y: "n",
+      fill: d => d.partial ? GU.red : GU.s1,
+      rx: 3,
+      insetLeft: 6,
+      insetRight: 6,
+      tip: true,
+      title: d => `${d.decade}${d.partial ? " (through 2025 — six years)" : ""}\n${fnum(d.n)} new rulings`
+    }),
+    Plot.textY(byDecade, {
+      x: "decade",
+      y: "n",
+      text: d => fnum(d.n) + (d.partial ? "*" : ""),
+      dy: -8,
+      fill: GU.ink,
+      fontSize: 12
+    }),
+    Plot.ruleY([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+::: {.chart-note}
+\* The 2020s bar (red) covers only 2020–2025 — six years — and has already
+reached two-thirds of the full 2010s total.
+:::
+
+## Where growth is happening
+
+Spokane County still produces the most new nonprofits in absolute terms, but
+Kootenai County's share of regional formations has risen steadily with its
+population boom. The chart compares each county's formations per five-year
+period.
+
+```{ojs}
+//| echo: false
+//| output: false
+countyGroups = formations
+  .filter(d => d.ruling_year >= 1990 && d.ruling_year <= 2024)
+  .map(d => ({
+    ...d,
+    group: ["Spokane County", "Kootenai County"].includes(d.county) ? d.county : "Other five counties",
+    period: `${Math.floor(d.ruling_year / 5) * 5}–${String(Math.floor(d.ruling_year / 5) * 5 + 4).slice(2)}`
+  }))
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+byPeriod = d3.rollups(
+  countyGroups,
+  v => d3.sum(v, d => d.n),
+  d => d.period,
+  d => d.group
+).flatMap(([period, groups]) => groups.map(([group, n]) => ({period, group, n})))
+  .sort((a, b) => d3.ascending(a.period, b.period))
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  height: 360,
+  width: 900,
+  marginLeft: 55,
+  style: {fontSize: "13px"},
+  x: {label: null},
+  y: {label: "New organizations per 5-year period", grid: true},
+  color: {
+    legend: true,
+    domain: ["Spokane County", "Kootenai County", "Other five counties"],
+    range: [GU.s1, GU.s3, GU.s2]
+  },
+  marks: [
+    Plot.lineY(byPeriod, {
+      x: "period",
+      y: "n",
+      stroke: "group",
+      strokeWidth: 2.5,
+      curve: "monotone-x"
+    }),
+    Plot.dot(byPeriod, {
+      x: "period",
+      y: "n",
+      fill: "group",
+      r: 4,
+      stroke: "#ffffff",
+      strokeWidth: 1,
+      tip: true,
+      title: d => `${d.group}\n${d.period}: ${fnum(d.n)} new rulings`
+    }),
+    Plot.ruleY([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+## What kinds of nonprofits are being formed now?
+
+Comparing the category mix of organizations formed since 2015 against the
+longer-standing sector shows where founders see unmet needs: recent cohorts
+tilt toward human services and away from the fraternal, membership, and
+religious organizations that dominate older cohorts.
+
+```{ojs}
+//| echo: false
+//| output: false
+cohortMix = {
+  const active = orgs.filter(d => d.ruling_year != null && d.subsector_name !== "Unclassified");
+  const mk = (rows, cohort) => {
+    const total = rows.length;
+    return d3.rollups(rows, v => v.length, d => d.subsector_name)
+      .map(([subsector, n]) => ({subsector, cohort, share: n / total * 100, n}));
+  };
+  return [
+    ...mk(active.filter(d => d.ruling_year < 2015), "Formed before 2015"),
+    ...mk(active.filter(d => d.ruling_year >= 2015), "Formed 2015 or later")
+  ];
+}
+```
+
+```{ojs}
+//| echo: false
+Plot.plot({
+  marginLeft: 200,
+  marginBottom: 45,
+  height: 430,
+  width: 900,
+  style: {fontSize: "13px"},
+  x: {label: "Share of cohort (%)", labelAnchor: "center", grid: true},
+  y: {label: null},
+  color: {
+    legend: true,
+    domain: ["Formed before 2015", "Formed 2015 or later"],
+    range: [GU.s2, GU.s1]
+  },
+  marks: [
+    Plot.dot(cohortMix, {
+      x: "share",
+      y: "subsector",
+      fill: "cohort",
+      r: 6,
+      stroke: "#ffffff",
+      strokeWidth: 1.5,
+      sort: {y: "-x"},
+      tip: true,
+      title: d => `${d.cohort}\n${d.subsector}: ${fpct(d.share)} (${fnum(d.n)} orgs)`
+    }),
+    Plot.ruleX([0], {stroke: "#c3c2b7"})
+  ]
+})
+```
+
+::: {.chart-note}
+Active organizations with a classified NTEE category only. Source: NCCS BMF,
+June 2026 vintage.
+:::
