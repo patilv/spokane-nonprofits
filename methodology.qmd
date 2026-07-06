@@ -145,8 +145,10 @@ and [Leaflet](https://leafletjs.com/).
 
 ## Reproducibility and attribution
 
-All data are public and all code is available in the repository that builds
-this site. Analyses were run in July 2026.
+All data are public and all code — the data pipeline, page sources, and
+rendered site — is available in the GitHub repository that builds this site:
+[github.com/patilv/spokane-nonprofits](https://github.com/patilv/spokane-nonprofits).
+Analyses were run in July 2026.
 
 Created by **Vivek H. Patil, Ph.D.**, Professor of Marketing and Director of
 Graduate Business Programs, Gonzaga University School of Business
